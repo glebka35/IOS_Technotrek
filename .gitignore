@@ -1,5 +1,5 @@
-DerivedData
-xcuserdata
-build
+DerivedData/
+xcuserdata/
+build/
 *.xccheckout
 
