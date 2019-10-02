@@ -66,8 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-}
-
     func applicationDidBecomeActive(_ application: UIApplication) {
         print("applicationDidBecomeActive: inactive -> active")
     }
@@ -87,3 +85,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         print("applicationWillTerminate: not running, background -> terminated (suspended)")
     }
+
+}
