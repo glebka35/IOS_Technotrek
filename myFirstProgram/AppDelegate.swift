@@ -10,14 +10,12 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UITableViewDelegate {
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        print("didFinishLaunchingWithOptions: suspended -> not running")
-       
         return true
     }
     
@@ -64,26 +62,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        print("applicationDidBecomeActive: inactive -> active")
-    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        print("applicationWillResignActive: active -> inactive")
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        print("applicationDidEnterBackground: inactive, not running -> background")
-    }
-    
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        print("applicationWillEnterForeground: background -> nearly active")
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        print("applicationWillTerminate: not running, background -> terminated (suspended)")
     }
 
 }

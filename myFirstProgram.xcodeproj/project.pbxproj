@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F7B3533E2356524D00206DF1 /* secondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B3533D2356524D00206DF1 /* secondViewController.swift */; };
+		F7C87A1C23574EC3005D5877 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F7C87A1B23574EC3005D5877 /* icon.png */; };
+		F7C951A32353AFE40067E78F /* ViewControllerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C951A22353AFE40067E78F /* ViewControllerTableViewCell.swift */; };
 		F7FA2D67234135700011135C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA2D66234135700011135C /* AppDelegate.swift */; };
 		F7FA2D6B234135700011135C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA2D6A234135700011135C /* ViewController.swift */; };
 		F7FA2D6E234135700011135C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7FA2D6C234135700011135C /* Main.storyboard */; };
@@ -27,7 +30,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F7FA2D63234135700011135C /* myFirstProgram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myFirstProgram.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7B3533D2356524D00206DF1 /* secondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secondViewController.swift; sourceTree = "<group>"; };
+		F7C87A1B23574EC3005D5877 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../../../../Desktop/icon.png; sourceTree = "<group>"; };
+		F7C951A22353AFE40067E78F /* ViewControllerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTableViewCell.swift; sourceTree = "<group>"; };
+		F7FA2D63234135700011135C /* News.|.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "News.|.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7FA2D66234135700011135C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7FA2D6A234135700011135C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F7FA2D6D234135700011135C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -70,7 +76,7 @@
 		F7FA2D64234135700011135C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F7FA2D63234135700011135C /* myFirstProgram.app */,
+				F7FA2D63234135700011135C /* News.|.app */,
 				F7FA2D7C234135710011135C /* myFirstProgramTests.xctest */,
 			);
 			name = Products;
@@ -79,8 +85,11 @@
 		F7FA2D65234135700011135C /* myFirstProgram */ = {
 			isa = PBXGroup;
 			children = (
+				F7C87A1B23574EC3005D5877 /* icon.png */,
 				F7FA2D66234135700011135C /* AppDelegate.swift */,
 				F7FA2D6A234135700011135C /* ViewController.swift */,
+				F7B3533D2356524D00206DF1 /* secondViewController.swift */,
+				F7C951A22353AFE40067E78F /* ViewControllerTableViewCell.swift */,
 				F7FA2D6C234135700011135C /* Main.storyboard */,
 				F7FA2D72234135710011135C /* Assets.xcassets */,
 				F7FA2D74234135710011135C /* LaunchScreen.storyboard */,
@@ -116,7 +125,7 @@
 			);
 			name = myFirstProgram;
 			productName = myFirstProgram;
-			productReference = F7FA2D63234135700011135C /* myFirstProgram.app */;
+			productReference = F7FA2D63234135700011135C /* News.|.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F7FA2D7B234135710011135C /* myFirstProgramTests */ = {
@@ -180,6 +189,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7C87A1C23574EC3005D5877 /* icon.png in Resources */,
 				F7FA2D76234135710011135C /* LaunchScreen.storyboard in Resources */,
 				F7FA2D73234135710011135C /* Assets.xcassets in Resources */,
 				F7FA2D6E234135700011135C /* Main.storyboard in Resources */,
@@ -202,6 +212,8 @@
 			files = (
 				F7FA2D6B234135700011135C /* ViewController.swift in Sources */,
 				F7FA2D71234135700011135C /* myFirstProgram.xcdatamodeld in Sources */,
+				F7C951A32353AFE40067E78F /* ViewControllerTableViewCell.swift in Sources */,
+				F7B3533E2356524D00206DF1 /* secondViewController.swift in Sources */,
 				F7FA2D67234135700011135C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,7 +383,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = glebUvarkin.myFirstProgram;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "News.|";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -390,7 +402,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = glebUvarkin.myFirstProgram;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "News.|";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
