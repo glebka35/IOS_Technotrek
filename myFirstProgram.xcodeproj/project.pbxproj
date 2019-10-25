@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F78FB7A3235F677B00360092 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78FB7A2235F677B00360092 /* ProfileViewController.swift */; };
+		F78FB7A5235F7D5E00360092 /* TableViewCellCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78FB7A4235F7D5E00360092 /* TableViewCellCategories.swift */; };
 		F7B3533E2356524D00206DF1 /* secondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B3533D2356524D00206DF1 /* secondViewController.swift */; };
 		F7C87A1C23574EC3005D5877 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F7C87A1B23574EC3005D5877 /* icon.png */; };
 		F7C951A32353AFE40067E78F /* ViewControllerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C951A22353AFE40067E78F /* ViewControllerTableViewCell.swift */; };
@@ -30,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F78FB7A2235F677B00360092 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		F78FB7A4235F7D5E00360092 /* TableViewCellCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellCategories.swift; sourceTree = "<group>"; };
 		F7B3533D2356524D00206DF1 /* secondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secondViewController.swift; sourceTree = "<group>"; };
 		F7C87A1B23574EC3005D5877 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../../../../Desktop/icon.png; sourceTree = "<group>"; };
 		F7C951A22353AFE40067E78F /* ViewControllerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTableViewCell.swift; sourceTree = "<group>"; };
@@ -95,6 +99,8 @@
 				F7FA2D74234135710011135C /* LaunchScreen.storyboard */,
 				F7FA2D77234135710011135C /* Info.plist */,
 				F7FA2D6F234135700011135C /* myFirstProgram.xcdatamodeld */,
+				F78FB7A2235F677B00360092 /* ProfileViewController.swift */,
+				F78FB7A4235F7D5E00360092 /* TableViewCellCategories.swift */,
 			);
 			path = myFirstProgram;
 			sourceTree = "<group>";
@@ -210,6 +216,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F78FB7A3235F677B00360092 /* ProfileViewController.swift in Sources */,
+				F78FB7A5235F7D5E00360092 /* TableViewCellCategories.swift in Sources */,
 				F7FA2D6B234135700011135C /* ViewController.swift in Sources */,
 				F7FA2D71234135700011135C /* myFirstProgram.xcdatamodeld in Sources */,
 				F7C951A32353AFE40067E78F /* ViewControllerTableViewCell.swift in Sources */,

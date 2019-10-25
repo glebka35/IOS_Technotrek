@@ -8,14 +8,26 @@
 
 import UIKit
 
+struct dataArticle{
+    var text: String?
+    var image: UIImage?
+}
+
 class secondViewController: UIViewController {
+    var article = dataArticle()
     
     @IBOutlet weak var imageVIew: UIImageView!
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var saveButton: UIButton!
+    
+    var text = ""
+    var image:UIImage? = UIImage()
+    
+    @IBOutlet weak var returnButton: UIButton!
     
     
-    
-    override func viewDidLoad() {        super.viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     
@@ -24,7 +36,14 @@ class secondViewController: UIViewController {
         super.viewWillAppear(animated)
         imageVIew.layer.cornerRadius = 20
         textView.isEditable = false
-        
+        returnButton.adjustsImageWhenHighlighted = false;
+        textView.text = text
+        imageVIew.image = image
+        saveButton.layer.cornerRadius = 7
+        saveButton.layer.borderColor = UIColor.black.cgColor
+        saveButton.layer.borderWidth = 1.5
+        saveButton.clipsToBounds = true
+        self.view.bringSubviewToFront(saveButton)
         
     }
     
@@ -33,14 +52,8 @@ class secondViewController: UIViewController {
     }
     
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func pressSaveButton(_ sender: Any) {
     }
-    */
-
+    
 }
