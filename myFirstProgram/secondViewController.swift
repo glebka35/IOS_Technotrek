@@ -11,10 +11,12 @@ import UIKit
 struct dataArticle{
     var text: String?
     var image: UIImage?
+    var title: String?
 }
 
 class secondViewController: UIViewController {
     var article = dataArticle()
+    let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     
     @IBOutlet weak var imageVIew: UIImageView!
     @IBOutlet weak var textView: UITextView!
@@ -22,12 +24,14 @@ class secondViewController: UIViewController {
     
     var text = ""
     var image:UIImage? = UIImage()
+    var articleTitle = ""
     
     @IBOutlet weak var returnButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        returnButton.adjustsImageWhenHighlighted = false;
     }
     
     
@@ -36,7 +40,7 @@ class secondViewController: UIViewController {
         super.viewWillAppear(animated)
         imageVIew.layer.cornerRadius = 20
         textView.isEditable = false
-        returnButton.adjustsImageWhenHighlighted = false;
+        
         textView.text = text
         imageVIew.image = image
         saveButton.layer.cornerRadius = 7
@@ -54,6 +58,13 @@ class secondViewController: UIViewController {
     
     
     @IBAction func pressSaveButton(_ sender: Any) {
+        activityIndicatorView.startAnimating()
+        let operationQueue = OperationQueue()
+        operationQueue.maxConcurrentOperationCount = 3
+        operationQueue.addOperation {
+            UserDefaults.standard.set(self.article, forKey: self.articleTitle)
+        }
+        activityIndicatorView.stopAnimating()
     }
     
 }

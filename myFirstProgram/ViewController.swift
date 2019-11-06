@@ -5,42 +5,48 @@
 //  Created by Глеб Уваркин on 29/09/2019.
 //  Copyright © 2019 Gleb Uvarkin. All rights reserved.
 //
-
 import UIKit
 
-
-
-struct Article: Decodable {
-    let articles: [articles]
-}
-
-struct articles: Decodable {
-    let author: String?
-    let title: String
-    let url: String
-    let urlToImage: String
-    let publishedAt: String
-    let content: String
-    let source: Source
-}
-
-struct Source: Decodable {
-    let id: String?
-    let name: String
-}
-
-
-
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate{
+    @IBOutlet weak var mainTable: UITableView!
     
-
     
-    var text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."
     var dataArray: [String] = ["lambo", "ferrari", "ferrari2"]
     let blurredEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     let blurredEffectViewPicker = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     
     private let categories = ["Favorites", "Startups", "Technology", "Business", "Politics"]
+    private var currentCategory = "Startups"
+    var countOfArticles = 0
+    
+    var listOfArticles = [ArticleDetail]() {
+        didSet {
+            let session = URLSession(configuration: .default)
+            self.listOfImages += Array(repeating: UIImage(named: "noPicture.png"), count: self.listOfArticles.count)
+            if(self.listOfArticles.count > 0){
+                for i in self.countOfArticles...self.listOfArticles.count - 1 {
+                    let URLToImage = self.listOfArticles[i].urlToImage
+                    if(URLToImage != nil) {
+                        let getImageFromUrl = session.dataTask(with: URL(string: URLToImage!)!) { (data, _, _) in
+                            guard let imageData = data else { return }
+                            guard let image = UIImage(data: imageData) else {return}
+                            self.listOfImages[i] = image
+                        }
+                        getImageFromUrl.resume()
+                    }
+                }
+                self.countOfArticles = self.listOfArticles.count
+            }
+        }
+    }
+    
+    var listOfImages = [UIImage?](){
+        didSet {
+            DispatchQueue.main.async {
+                self.mainTable.reloadData()
+            }
+        }
+    }
     
     @IBOutlet var mainView: UIView!
     @IBOutlet weak var viemForPicker: UIView!
@@ -54,6 +60,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let articleRequest = ArticleRequest(category: currentCategory)
+        articleRequest.getArticles {[weak self] result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let articles):
+                self?.listOfArticles = articles
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         UiViewBar.backgroundColor = UIColor.clear
         blurredEffectView.frame = UiViewBar.bounds
         UiViewBar.addSubview(blurredEffectView)
@@ -77,31 +95,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         viemForPicker.layer.cornerRadius = 20
 
         viemForPicker.clipsToBounds = true
-        menuButton.setTitle("Startups", for: .normal)
-        
-//        if let url = URL(string: "https://newsapi.org/v2/everything?q=bitcoin&from=2019-09-16&sortBy=publishedAt&apiKey=3261fe0c899147bea616ee4669ef54bf")
-//        {
-//            
-//            let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
-//                guard let data = data else { return }
-//                //print(String(data: data, encoding: .utf8)!)
-//                do{
-//                    let myUserStruct = try JSONDecoder().decode(Article.self, from: data)
-//                    print(myUserStruct.articles[1].author!) // prints "Mustafa"
-//                    
-//                }
-//                catch{
-//                print(error)
-//                }
-//            }
-//            
-//            task.resume()
-//            
-//            
-//        }
-        
+        menuButton.setTitle(currentCategory, for: .normal)
         
     }
+    
 
     @IBAction func touchMenuButton(_ sender: Any) {
         
@@ -126,13 +123,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        menuButton.setTitle(categories[row], for: .selected)
-        menuButton.setTitle(categories[row], for: .highlighted)
-        menuButton.setTitle(categories[row], for: .normal)
+        currentCategory = categories[row]
+        menuButton.setTitle(currentCategory, for: .normal)
+        let articleRequest = ArticleRequest(category: currentCategory)
+        articleRequest.getArticles {[weak self] result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let articles):
+                self?.listOfArticles = articles
+            }
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return dataArray.count
+        return listOfArticles.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -141,9 +147,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath) as! ViewControllerTableViewCell
-        cell.myImage?.image = UIImage(named:  (dataArray[indexPath.row]+".jpg"))
-        cell.myLabel?.text = dataArray[indexPath.row]
-        
+        cell.myImage?.image = self.listOfImages[indexPath.row]
+        cell.myLabel?.text = self.listOfArticles[indexPath.row].title
         return cell
     }
     
@@ -151,12 +156,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let sb = UIStoryboard(name: "Main", bundle: nil)
         if let secondVC = sb.instantiateViewController(withIdentifier: "SecondVC") as? secondViewController {
             
-            secondVC.text = text
-            secondVC.image = UIImage(named:  (dataArray[indexPath.row]+".jpg"))
+            secondVC.text = listOfArticles[indexPath.row].content
+            secondVC.image = listOfImages[indexPath.row]
+            secondVC.articleTitle = listOfArticles[indexPath.row].title
             self.navigationController?.pushViewController(secondVC, animated: true)
-            
-            
-        
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -173,5 +176,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if(indexPath.row == listOfArticles.count - 1){
+            let articleRequest = ArticleRequest(category: currentCategory)
+            articleRequest.getArticles {[weak self] result in
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .success(let articles):
+                    self?.listOfArticles += articles
+                }
+            }
+        }
+    }
 }
 

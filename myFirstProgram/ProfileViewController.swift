@@ -23,6 +23,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var choosePhotoButton: UIButton!
     @IBOutlet weak var backToProfile: UIButton!
     @IBOutlet weak var categoriesLabel: UILabel!
+    @IBOutlet weak var backMenuButton: UIButton!
     let blurredEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     private let categories = ["Startups", "Technology", "Business", "Politics"]
     
@@ -113,6 +114,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.view.bringSubviewToFront(activityIndicatorView)
         activityIndicatorView.frame = self.view.frame
         activityIndicatorView.center = self.view.center
+        backMenuButton.adjustsImageWhenHighlighted = false
     
     }
     
@@ -229,5 +231,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             UserDefaults.standard.set(self.person.favoriteCategories, forKey: "favoriteCategories")
         }
         activityIndicatorView.stopAnimating()
+    }
+    @IBAction func touchBackToMenuButton(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 }

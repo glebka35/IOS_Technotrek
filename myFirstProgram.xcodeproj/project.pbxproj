@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F74379742364A4C200C64093 /* ArticleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74379732364A4C200C64093 /* ArticleRequest.swift */; };
+		F74379762364A68A00C64093 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74379752364A68A00C64093 /* Article.swift */; };
 		F78FB7A3235F677B00360092 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78FB7A2235F677B00360092 /* ProfileViewController.swift */; };
 		F78FB7A5235F7D5E00360092 /* TableViewCellCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78FB7A4235F7D5E00360092 /* TableViewCellCategories.swift */; };
 		F7B3533E2356524D00206DF1 /* secondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B3533D2356524D00206DF1 /* secondViewController.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F74379732364A4C200C64093 /* ArticleRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRequest.swift; sourceTree = "<group>"; };
+		F74379752364A68A00C64093 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		F78FB7A2235F677B00360092 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F78FB7A4235F7D5E00360092 /* TableViewCellCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellCategories.swift; sourceTree = "<group>"; };
 		F7B3533D2356524D00206DF1 /* secondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secondViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +96,8 @@
 				F7C87A1B23574EC3005D5877 /* icon.png */,
 				F7FA2D66234135700011135C /* AppDelegate.swift */,
 				F7FA2D6A234135700011135C /* ViewController.swift */,
+				F74379732364A4C200C64093 /* ArticleRequest.swift */,
+				F74379752364A68A00C64093 /* Article.swift */,
 				F7B3533D2356524D00206DF1 /* secondViewController.swift */,
 				F7C951A22353AFE40067E78F /* ViewControllerTableViewCell.swift */,
 				F7FA2D6C234135700011135C /* Main.storyboard */,
@@ -218,8 +224,10 @@
 			files = (
 				F78FB7A3235F677B00360092 /* ProfileViewController.swift in Sources */,
 				F78FB7A5235F7D5E00360092 /* TableViewCellCategories.swift in Sources */,
+				F74379762364A68A00C64093 /* Article.swift in Sources */,
 				F7FA2D6B234135700011135C /* ViewController.swift in Sources */,
 				F7FA2D71234135700011135C /* myFirstProgram.xcdatamodeld in Sources */,
+				F74379742364A4C200C64093 /* ArticleRequest.swift in Sources */,
 				F7C951A32353AFE40067E78F /* ViewControllerTableViewCell.swift in Sources */,
 				F7B3533E2356524D00206DF1 /* secondViewController.swift in Sources */,
 				F7FA2D67234135700011135C /* AppDelegate.swift in Sources */,

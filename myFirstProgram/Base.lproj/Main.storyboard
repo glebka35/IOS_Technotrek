@@ -149,6 +149,7 @@
                     <navigationItem key="navigationItem" id="3AW-T1-0Hg"/>
                     <connections>
                         <outlet property="UiViewBar" destination="7XI-HV-EeU" id="89u-QI-cxm"/>
+                        <outlet property="mainTable" destination="Aqb-SY-E1M" id="Uzm-zL-7kr"/>
                         <outlet property="mainView" destination="8bC-Xf-vdC" id="qfE-Ki-eAp"/>
                         <outlet property="menuButton" destination="dtt-sZ-4Kr" id="C4B-mV-Qmb"/>
                         <outlet property="menuImage" destination="bih-kc-yHM" id="nis-Pv-NPT"/>
@@ -183,10 +184,18 @@
                                     <action selector="returnButton:" destination="9xY-vC-5tC" eventType="touchUpInside" id="eVA-vO-g5A"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dQn-Ep-tey">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dQn-Ep-tey">
                                 <rect key="frame" x="20" y="466" width="374" height="377"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <mutableString key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non ex finibus, laoreet ex aliquet, dictum tortor. Suspendisse a blandit elit. Curabitur sodales non tortor nec facilisis. Integer imperdiet iaculis magna eu malesuada. Duis ullamcorper nunc placerat porttitor ultrices. Nulla varius et massa a tempor. Vivamus eu varius arcu. Nunc orci nulla, ultrices sit amet mi quis, feugiat malesuada dolor.
+
+Phasellus luctus nulla in felis tempor mollis. Ut ut risus commodo, blandit lorem in, aliquet massa. Sed ultrices ligula id condimentum porttitor. Aliquam molestie purus eu pretium euismod. Nulla ullamcorper metus ac enim ornare, id tincidunt ligula pellentesque. Donec accumsan lorem vel enim ultrices, in tristique nulla convallis. Nunc posuere commodo tellus at rutrum. Curabitur a turpis convallis, suscipit justo a, pellentesque felis. Quisque nibh orci, pulvinar sit amet nulla eu, sodales sollicitudin turpis.
+
+Donec vestibulum porta egestas. Aliquam erat volutpat. Nunc nulla enim, mattis vel sodales quis, dictum in sem. Morbi ultrices ligula nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend dolor lectus, et blandit justo congue ac. Morbi justo eros, convallis vitae orci at, sodales ultricies ligula. Vestibulum bibendum turpis nunc, eu elementum libero viverra quis. Maecenas non sagittis odio, a ultricies sapien. Quisque fringilla blandit arcu, eu luctus mi euismod id. Fusce nulla urna, aliquam ut lorem quis, efficitur molestie purus. Pellentesque odio tellus, ullamcorper eget nibh sed, vulputate accumsan orci. Etiam dignissim massa ut ex lobortis, vitae dignissim ante consectetur. Praesent et consectetur libero.
+
+Vestibulum convallis ullamcorper erat, id placerat tellus pulvinar eleifend. Donec venenatis aliquet metus, et condimentum nisl dictum eget. Curabitur rutrum rhoncus nunc, ut blandit quam. Mauris tristique ac justo ut ullamcorper. Suspendisse lacus quam, commodo at orci aliquet, pulvinar aliquam ipsum. Donec tempus semper pulvinar. Cras lobortis lacinia nisi id sodales. Duis ornare maximus lobortis. Donec a nulla a purus luctus rhoncus. Curabitur non eros ipsum. Pellentesque a mi eu velit mollis tincidunt non sit amet ipsum. Proin eu auctor justo. Aliquam pretium sed libero et tempor. Sed sed sagittis turpis, quis eleifend lorem. Suspendisse venenatis erat eget lorem tincidunt, sit amet fringilla orci placerat. Integer pellentesque elit ut urna mattis, vel consequat leo eleifend.
+
+Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus, mattis in porta ut, luctus a urna. Sed a vulputate nisl, non hendrerit lacus. Phasellus scelerisque sit amet risus eget lobortis. Cras ut semper libero. Phasellus pulvinar mauris id faucibus pellentesque. Aliquam erat volutpat. Fusce sit amet erat ligula. Morbi purus neque, varius vitae arcu quis, hendrerit suscipit lacus. Integer malesuada pulvinar dui, sed luctus lorem porttitor ut. Aliquam dictum mollis justo, nec vestibulum ligula euismod nec.</mutableString>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -408,11 +417,24 @@
                                     <constraint firstAttribute="trailing" secondItem="6gh-GS-4aK" secondAttribute="trailing" id="o91-a3-NxX"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PnZ-G2-m7T">
+                                <rect key="frame" x="20" y="44" width="55" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="H3f-xM-t8E"/>
+                                    <constraint firstAttribute="width" constant="55" id="zRk-sE-T7O"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="back"/>
+                                <connections>
+                                    <action selector="touchBackButton:" destination="d4L-KC-uQl" eventType="touchUpInside" id="g0T-Cs-njJ"/>
+                                    <action selector="touchBackToMenuButton:" destination="d4L-KC-uQl" eventType="touchUpInside" id="slR-1o-53m"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="dCs-kZ-jZ0" firstAttribute="leading" secondItem="J1P-UH-22v" secondAttribute="leading" id="2u6-xy-5wb"/>
                             <constraint firstItem="o8b-nQ-tw0" firstAttribute="leading" secondItem="J1P-UH-22v" secondAttribute="leading" constant="20" id="5XF-GU-VSA"/>
+                            <constraint firstItem="5JF-YT-tpc" firstAttribute="top" secondItem="PnZ-G2-m7T" secondAttribute="bottom" constant="27" id="68N-0G-qB6"/>
                             <constraint firstItem="J1P-UH-22v" firstAttribute="trailing" secondItem="pVK-fK-uFk" secondAttribute="trailing" constant="20" id="6ZP-9A-QsY"/>
                             <constraint firstItem="dCs-kZ-jZ0" firstAttribute="top" secondItem="J1P-UH-22v" secondAttribute="top" constant="109" id="6p5-t0-L0q"/>
                             <constraint firstItem="J1P-UH-22v" firstAttribute="bottom" secondItem="dCs-kZ-jZ0" secondAttribute="bottom" id="7Uw-yO-J4k"/>
@@ -433,6 +455,7 @@
                             <constraint firstItem="3e3-9R-6pI" firstAttribute="leading" relation="lessThanOrEqual" secondItem="1WF-fj-sGf" secondAttribute="trailing" constant="134" id="j9F-Bj-K71"/>
                             <constraint firstItem="pVK-fK-uFk" firstAttribute="leading" secondItem="J1P-UH-22v" secondAttribute="leading" constant="20" id="jMf-Ae-iyO"/>
                             <constraint firstItem="o8b-nQ-tw0" firstAttribute="top" secondItem="5JF-YT-tpc" secondAttribute="bottom" constant="5" id="kv4-PO-67L"/>
+                            <constraint firstItem="PnZ-G2-m7T" firstAttribute="leading" secondItem="J1P-UH-22v" secondAttribute="leading" constant="20" id="lxA-sA-Zr9"/>
                             <constraint firstItem="KtY-LM-Ch2" firstAttribute="trailing" secondItem="5JF-YT-tpc" secondAttribute="trailing" constant="-5" id="rkH-I5-tEf"/>
                             <constraint firstItem="J1P-UH-22v" firstAttribute="bottom" secondItem="1WF-fj-sGf" secondAttribute="bottom" constant="72" id="tJr-Rn-eaQ"/>
                             <constraint firstItem="1WF-fj-sGf" firstAttribute="leading" secondItem="J1P-UH-22v" secondAttribute="leading" constant="20" id="wYn-4P-h1Y"/>
@@ -441,6 +464,7 @@
                         <viewLayoutGuide key="safeArea" id="J1P-UH-22v"/>
                     </view>
                     <connections>
+                        <outlet property="backMenuButton" destination="PnZ-G2-m7T" id="b8D-T1-DUq"/>
                         <outlet property="backToProfile" destination="dLF-OM-fK4" id="qWx-et-EI0"/>
                         <outlet property="buttonGCD" destination="1WF-fj-sGf" id="SJu-2e-wrx"/>
                         <outlet property="buttonNSOperation" destination="3e3-9R-6pI" id="C4U-ze-HuW"/>
