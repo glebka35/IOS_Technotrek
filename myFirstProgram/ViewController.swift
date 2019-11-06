@@ -16,7 +16,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let blurredEffectViewPicker = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     
     private let categories = ["Favorites", "Startups", "Technology", "Business", "Politics"]
-    private var currentCategory = "Startups"
+    private var currentCategory = "Technology"
     var countOfArticles = 0
     
     var listOfArticles = [ArticleDetail]() {
@@ -58,6 +58,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var profileButton: UIButton!
     
     override func viewDidLoad() {
+        // Delete UserDefaults
+        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+        UserDefaults.standard.synchronize()
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         let articleRequest = ArticleRequest(category: currentCategory)
@@ -65,6 +69,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             switch result {
             case .failure(let error):
                 print(error)
+                var articlesMemory = [ArticleDetail]()
+                
+                var i = 0;
+                while UserDefaults.standard.object(forKey: self!.currentCategory + "content" + String(i)) != nil {
+                    let content = UserDefaults.standard.string(forKey: self!.currentCategory + "content" + String(i))!
+                    let title = UserDefaults.standard.string(forKey: self!.currentCategory + "title" + String(i))
+                    let image = UIImage(data: UserDefaults.standard.object(forKey: self!.currentCategory + "image" + String(i)) as! Data)
+                    let article = ArticleDetail(author: nil, title: title, url: nil, urlToImage: nil, publishedAt: nil, content: content, source: nil)
+                    articlesMemory.append(article)
+                    self?.listOfImages.append(image)
+                    i += 1
+                }
+                self?.listOfArticles = articlesMemory
+                
+                
             case .success(let articles):
                 self?.listOfArticles = articles
             }
@@ -123,6 +142,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.countOfArticles = 0
         currentCategory = categories[row]
         menuButton.setTitle(currentCategory, for: .normal)
         let articleRequest = ArticleRequest(category: currentCategory)
@@ -130,6 +150,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             switch result {
             case .failure(let error):
                 print(error)
+                var articlesMemory = [ArticleDetail]()
+                
+                var i = 0;
+                while UserDefaults.standard.object(forKey: self!.currentCategory + "content" + String(i)) != nil {
+                    let content = UserDefaults.standard.string(forKey: self!.currentCategory + "content" + String(i))!
+                    let title = UserDefaults.standard.string(forKey: self!.currentCategory + "title" + String(i))
+                    let image = UIImage(data: UserDefaults.standard.object(forKey: self!.currentCategory + "image" + String(i)) as! Data)
+                    let article = ArticleDetail(author: nil, title: title!, url: nil, urlToImage: nil, publishedAt: nil, content: content, source: nil)
+                    articlesMemory.append(article)
+                    self?.listOfImages.append(image)
+                    i += 1
+                }
+                self?.listOfArticles = articlesMemory
             case .success(let articles):
                 self?.listOfArticles = articles
             }
@@ -158,7 +191,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             secondVC.text = listOfArticles[indexPath.row].content
             secondVC.image = listOfImages[indexPath.row]
-            secondVC.articleTitle = listOfArticles[indexPath.row].title
+            secondVC.currentCategory = self.currentCategory
+            secondVC.articletTitle = listOfArticles[indexPath.row].title!
             self.navigationController?.pushViewController(secondVC, animated: true)
         }
         

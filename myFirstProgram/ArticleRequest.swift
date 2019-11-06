@@ -16,6 +16,7 @@ enum ArticleError:Error {
 struct ArticleRequest {
     let resourceURL:URL
     let API_KEY = "3261fe0c899147bea616ee4669ef54bf"
+    var isDownloadGood = false
     
     init(category:String) {
         let date = Date()

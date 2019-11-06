@@ -12,6 +12,7 @@ struct dataArticle{
     var text: String?
     var image: UIImage?
     var title: String?
+    var author: String?
 }
 
 class secondViewController: UIViewController {
@@ -23,8 +24,9 @@ class secondViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     
     var text = ""
+    var articletTitle = ""
     var image:UIImage? = UIImage()
-    var articleTitle = ""
+    var currentCategory = ""
     
     @IBOutlet weak var returnButton: UIButton!
     
@@ -60,9 +62,16 @@ class secondViewController: UIViewController {
     @IBAction func pressSaveButton(_ sender: Any) {
         activityIndicatorView.startAnimating()
         let operationQueue = OperationQueue()
-        operationQueue.maxConcurrentOperationCount = 3
+        operationQueue.maxConcurrentOperationCount = 1
         operationQueue.addOperation {
-            UserDefaults.standard.set(self.article, forKey: self.articleTitle)
+            var i = 0;
+            while UserDefaults.standard.string(forKey: self.currentCategory + "content" + String(i)) != nil {
+                i+=1
+            }
+            UserDefaults.standard.set(self.text, forKey: self.currentCategory + "content" + String(i))
+            UserDefaults.standard.set(self.articletTitle, forKey: self.currentCategory + "title" + String(i))
+            UserDefaults.standard.set(self.image?.jpegData(compressionQuality: 0.8), forKey: self.currentCategory + "image" + String(i))
+            let Content = UserDefaults.standard.string(forKey: self.currentCategory + "title" + String(i))
         }
         activityIndicatorView.stopAnimating()
     }
