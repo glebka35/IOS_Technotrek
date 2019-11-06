@@ -71,7 +71,6 @@ class secondViewController: UIViewController {
             UserDefaults.standard.set(self.text, forKey: self.currentCategory + "content" + String(i))
             UserDefaults.standard.set(self.articletTitle, forKey: self.currentCategory + "title" + String(i))
             UserDefaults.standard.set(self.image?.jpegData(compressionQuality: 0.8), forKey: self.currentCategory + "image" + String(i))
-            let Content = UserDefaults.standard.string(forKey: self.currentCategory + "title" + String(i))
         }
         activityIndicatorView.stopAnimating()
     }

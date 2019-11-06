@@ -59,8 +59,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         // Delete UserDefaults
-        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-        UserDefaults.standard.synchronize()
+//        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+//        UserDefaults.standard.synchronize()
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -145,6 +145,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.countOfArticles = 0
         currentCategory = categories[row]
         menuButton.setTitle(currentCategory, for: .normal)
+        
+        self.listOfImages = Array(repeating: UIImage(named: "noPicture.png"), count: self.listOfImages.count)
+        
         let articleRequest = ArticleRequest(category: currentCategory)
         articleRequest.getArticles {[weak self] result in
             switch result {
@@ -189,7 +192,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let sb = UIStoryboard(name: "Main", bundle: nil)
         if let secondVC = sb.instantiateViewController(withIdentifier: "SecondVC") as? secondViewController {
             
-            secondVC.text = listOfArticles[indexPath.row].content
+            secondVC.text = listOfArticles[indexPath.row].content ?? ""
             secondVC.image = listOfImages[indexPath.row]
             secondVC.currentCategory = self.currentCategory
             secondVC.articletTitle = listOfArticles[indexPath.row].title!
