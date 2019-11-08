@@ -1,5 +1,5 @@
 //
-//  ViewControllerTableViewCell.swift
+//  MainTableViewCell.swift
 //  myFirstProgram
 //
 //  Created by Глеб Уваркин on 13/10/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewControllerTableViewCell: UITableViewCell {
+class MainTableViewCell: UITableViewCell {
 
     @IBOutlet weak var myImage: UIImageView!
     @IBOutlet weak var myLabel: UILabel!

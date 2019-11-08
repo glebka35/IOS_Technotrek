@@ -1,5 +1,5 @@
 //
-//  secondViewController.swift
+//  ArticleViewController.swift
 //  myFirstProgram
 //
 //  Created by Глеб Уваркин on 15/10/2019.
@@ -8,14 +8,15 @@
 
 import UIKit
 
-struct dataArticle{
+struct dataArticle {
     var text: String?
     var image: UIImage?
     var title: String?
     var author: String?
 }
 
-class secondViewController: UIViewController {
+class ArticleViewController: UIViewController {
+    
     var article = dataArticle()
     let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     

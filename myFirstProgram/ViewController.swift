@@ -10,13 +10,12 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate{
     @IBOutlet weak var mainTable: UITableView!
     
-    
     var dataArray: [String] = ["lambo", "ferrari", "ferrari2"]
     let blurredEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     let blurredEffectViewPicker = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     
-    private let categories = ["Favorites", "Startups", "Technology", "Business", "Politics"]
-    private var currentCategory = "Technology"
+    private let categories = ["Startups", "Technology", "Business", "Politics", "Favorites"]
+    private var currentCategory = "Startups"
     var countOfArticles = 0
     
     var listOfArticles = [ArticleDetail]() {
@@ -26,7 +25,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if(self.listOfArticles.count > 0){
                 for i in self.countOfArticles...self.listOfArticles.count - 1 {
                     let URLToImage = self.listOfArticles[i].urlToImage
-                    if(URLToImage != nil) {
+                    if(URLToImage != nil && URLToImage != "") {
                         let getImageFromUrl = session.dataTask(with: URL(string: URLToImage!)!) { (data, _, _) in
                             guard let imageData = data else { return }
                             guard let image = UIImage(data: imageData) else {return}
@@ -115,7 +114,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         viemForPicker.clipsToBounds = true
         menuButton.setTitle(currentCategory, for: .normal)
-        
     }
     
 
@@ -182,7 +180,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath) as! ViewControllerTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath) as! MainTableViewCell
         cell.myImage?.image = self.listOfImages[indexPath.row]
         cell.myLabel?.text = self.listOfArticles[indexPath.row].title
         return cell
@@ -190,13 +188,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        if let secondVC = sb.instantiateViewController(withIdentifier: "SecondVC") as? secondViewController {
+        if let articleVC = sb.instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController
+        {
             
-            secondVC.text = listOfArticles[indexPath.row].content ?? ""
-            secondVC.image = listOfImages[indexPath.row]
-            secondVC.currentCategory = self.currentCategory
-            secondVC.articletTitle = listOfArticles[indexPath.row].title!
-            self.navigationController?.pushViewController(secondVC, animated: true)
+            articleVC.text = listOfArticles[indexPath.row].content ?? ""
+            articleVC.image = listOfImages[indexPath.row]
+            articleVC.currentCategory = self.currentCategory
+            articleVC.articletTitle = listOfArticles[indexPath.row].title!
+            self.navigationController?.pushViewController(articleVC, animated: true)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)

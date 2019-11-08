@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellIdentifier" rowHeight="300" id="zkE-Rg-15f" customClass="ViewControllerTableViewCell" customModule="News__" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellIdentifier" rowHeight="300" id="zkE-Rg-15f" customClass="MainTableViewCell" customModule="News__" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zkE-Rg-15f" id="Esa-BL-OxV">
@@ -163,10 +163,10 @@
             </objects>
             <point key="canvasLocation" x="1182.608695652174" y="128.57142857142856"/>
         </scene>
-        <!--Second View Controller-->
+        <!--Article View Controller-->
         <scene sceneID="FyR-HJ-M6F">
             <objects>
-                <viewController storyboardIdentifier="SecondVC" id="9xY-vC-5tC" customClass="secondViewController" customModule="News__" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArticleVC" id="9xY-vC-5tC" customClass="ArticleViewController" customModule="News__" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7l6-Zj-Qzp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -187,7 +187,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dQn-Ep-tey">
                                 <rect key="frame" x="20" y="466" width="374" height="377"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <mutableString key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non ex finibus, laoreet ex aliquet, dictum tortor. Suspendisse a blandit elit. Curabitur sodales non tortor nec facilisis. Integer imperdiet iaculis magna eu malesuada. Duis ullamcorper nunc placerat porttitor ultrices. Nulla varius et massa a tempor. Vivamus eu varius arcu. Nunc orci nulla, ultrices sit amet mi quis, feugiat malesuada dolor.
+                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non ex finibus, laoreet ex aliquet, dictum tortor. Suspendisse a blandit elit. Curabitur sodales non tortor nec facilisis. Integer imperdiet iaculis magna eu malesuada. Duis ullamcorper nunc placerat porttitor ultrices. Nulla varius et massa a tempor. Vivamus eu varius arcu. Nunc orci nulla, ultrices sit amet mi quis, feugiat malesuada dolor.
 
 Phasellus luctus nulla in felis tempor mollis. Ut ut risus commodo, blandit lorem in, aliquet massa. Sed ultrices ligula id condimentum porttitor. Aliquam molestie purus eu pretium euismod. Nulla ullamcorper metus ac enim ornare, id tincidunt ligula pellentesque. Donec accumsan lorem vel enim ultrices, in tristique nulla convallis. Nunc posuere commodo tellus at rutrum. Curabitur a turpis convallis, suscipit justo a, pellentesque felis. Quisque nibh orci, pulvinar sit amet nulla eu, sodales sollicitudin turpis.
 
@@ -195,7 +195,7 @@ Donec vestibulum porta egestas. Aliquam erat volutpat. Nunc nulla enim, mattis v
 
 Vestibulum convallis ullamcorper erat, id placerat tellus pulvinar eleifend. Donec venenatis aliquet metus, et condimentum nisl dictum eget. Curabitur rutrum rhoncus nunc, ut blandit quam. Mauris tristique ac justo ut ullamcorper. Suspendisse lacus quam, commodo at orci aliquet, pulvinar aliquam ipsum. Donec tempus semper pulvinar. Cras lobortis lacinia nisi id sodales. Duis ornare maximus lobortis. Donec a nulla a purus luctus rhoncus. Curabitur non eros ipsum. Pellentesque a mi eu velit mollis tincidunt non sit amet ipsum. Proin eu auctor justo. Aliquam pretium sed libero et tempor. Sed sed sagittis turpis, quis eleifend lorem. Suspendisse venenatis erat eget lorem tincidunt, sit amet fringilla orci placerat. Integer pellentesque elit ut urna mattis, vel consequat leo eleifend.
 
-Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus, mattis in porta ut, luctus a urna. Sed a vulputate nisl, non hendrerit lacus. Phasellus scelerisque sit amet risus eget lobortis. Cras ut semper libero. Phasellus pulvinar mauris id faucibus pellentesque. Aliquam erat volutpat. Fusce sit amet erat ligula. Morbi purus neque, varius vitae arcu quis, hendrerit suscipit lacus. Integer malesuada pulvinar dui, sed luctus lorem porttitor ut. Aliquam dictum mollis justo, nec vestibulum ligula euismod nec.</mutableString>
+Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus, mattis in porta ut, luctus a urna. Sed a vulputate nisl, non hendrerit lacus. Phasellus scelerisque sit amet risus eget lobortis. Cras ut semper libero. Phasellus pulvinar mauris id faucibus pellentesque. Aliquam erat volutpat. Fusce sit amet erat ligula. Morbi purus neque, varius vitae arcu quis, hendrerit suscipit lacus. Integer malesuada pulvinar dui, sed luctus lorem porttitor ut. Aliquam dictum mollis justo, nec vestibulum ligula euismod nec.</string>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
