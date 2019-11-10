@@ -6,11 +6,14 @@
 //  Copyright © 2019 Gleb Uvarkin. All rights reserved.
 //
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate{
+    
+    var coreDataStack = CoreDataStack()
+    
     @IBOutlet weak var mainTable: UITableView!
     
-    var dataArray: [String] = ["lambo", "ferrari", "ferrari2"]
     let blurredEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     let blurredEffectViewPicker = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     
@@ -62,26 +65,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        UserDefaults.standard.synchronize()
         
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        self.coreDataStack = CoreDataStack()
+        
         let articleRequest = ArticleRequest(category: currentCategory)
         articleRequest.getArticles {[weak self] result in
             switch result {
             case .failure(let error):
                 print(error)
-                var articlesMemory = [ArticleDetail]()
-                
-                var i = 0;
-                while UserDefaults.standard.object(forKey: self!.currentCategory + "content" + String(i)) != nil {
-                    let content = UserDefaults.standard.string(forKey: self!.currentCategory + "content" + String(i))!
-                    let title = UserDefaults.standard.string(forKey: self!.currentCategory + "title" + String(i))
-                    let image = UIImage(data: UserDefaults.standard.object(forKey: self!.currentCategory + "image" + String(i)) as! Data)
-                    let article = ArticleDetail(author: nil, title: title, url: nil, urlToImage: nil, publishedAt: nil, content: content, source: nil)
-                    articlesMemory.append(article)
-                    self?.listOfImages.append(image)
-                    i += 1
-                }
-                self?.listOfArticles = articlesMemory
-                
                 
             case .success(let articles):
                 self?.listOfArticles = articles
@@ -151,21 +141,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             switch result {
             case .failure(let error):
                 print(error)
-                var articlesMemory = [ArticleDetail]()
-                
-                var i = 0;
-                while UserDefaults.standard.object(forKey: self!.currentCategory + "content" + String(i)) != nil {
-                    let content = UserDefaults.standard.string(forKey: self!.currentCategory + "content" + String(i))!
-                    let title = UserDefaults.standard.string(forKey: self!.currentCategory + "title" + String(i))
-                    let image = UIImage(data: UserDefaults.standard.object(forKey: self!.currentCategory + "image" + String(i)) as! Data)
-                    let article = ArticleDetail(author: nil, title: title!, url: nil, urlToImage: nil, publishedAt: nil, content: content, source: nil)
-                    articlesMemory.append(article)
-                    self?.listOfImages.append(image)
-                    i += 1
-                }
-                self?.listOfArticles = articlesMemory
             case .success(let articles):
                 self?.listOfArticles = articles
+                
+                if let articleEntity = NSEntityDescription.entity(forEntityName: "Articles", in: self!.coreDataStack.masterContext!),
+                    let categoryEntity = NSEntityDescription.entity(forEntityName: "Categories", in: self!.coreDataStack.masterContext!){
+                    let categoryForContext = Categories(entity: categoryEntity, insertInto: self!.coreDataStack.masterContext)
+                    
+                    for article in articles {
+                        let articleForContext = Articles(entity: articleEntity, insertInto: self!.coreDataStack.masterContext!)
+                        
+                        categoryForContext.name = self?.currentCategory
+                        articleForContext.author = article.author
+                        articleForContext.content = article.content
+                        articleForContext.title = article.title
+                        articleForContext.date = article.publishedAt
+                        articleForContext.image = nil
+                        articleForContext.category = categoryForContext
+                        categoryForContext.addToArticle(articleForContext)
+                    }
+                }
+                
+                self!.coreDataStack.performSave(context:self!.coreDataStack.masterContext!)
+                
             }
         }
         
