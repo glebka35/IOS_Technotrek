@@ -13,16 +13,19 @@ struct ArticleResponse: Decodable {
 }
 
 struct ArticleDetail: Decodable {
-    let author: String?
-    let title: String?
-    let url: String?
-    let urlToImage: String?
-    let publishedAt: String?
-    let content: String?
-    let source: Source?
+    var author: String?
+    var title: String?
+    var url: String?
+    var urlToImage: String?
+    var publishedAt: String?
+    var content: String?
+    var source: Source?
+    var image: Data?
 }
 
 struct Source: Decodable {
-    let id: String?
-    let name: String?
+    var id: String?
+    var name: String?
 }
+
+

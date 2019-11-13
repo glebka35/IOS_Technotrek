@@ -10,64 +10,21 @@ import Foundation
 import CoreData
 
 class CoreDataStack {
-    private var storeURL: URL {
-        get{
-            let documentsDirURL:URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let url = documentsDirURL.appendingPathComponent("Store.sqlite")
-            return url
-        }
-    }
-    
-    private let managedObjectModelName = "myFirstProgram"
-    private var _managedObjectModel : NSManagedObjectModel?
-    private var managedObjectModel : NSManagedObjectModel? {
-        get {
-            if _managedObjectModel == nil {
-                guard let modelURL = Bundle.main.url(forResource: managedObjectModelName, withExtension: "momd") else {
-                    print("Empty model url")
-                    return nil
-                }
-                
-                _managedObjectModel = NSManagedObjectModel(contentsOf: modelURL)
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "myFirstProgram")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-            return _managedObjectModel
-        }
-    }
-    
-    private var _persistentStoreCoordinator : NSPersistentStoreCoordinator?
-    private var persistentStoreCoordinator : NSPersistentStoreCoordinator? {
-        get {
-            if _persistentStoreCoordinator == nil {
-                guard let model = self.managedObjectModel else {
-                    print("Empty managed object model")
-                    return nil
-                }
-                
-                _persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
-                do {
-                    try _persistentStoreCoordinator?.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
-                } catch {
-                    assert(false, "Error adding persistent store to coordinator: \(error)")
-                }
-            }
-            return _persistentStoreCoordinator
-        }
-    }
+        })
+        return container
+    }()
     
     public var _masterContext : NSManagedObjectContext?
     public var masterContext : NSManagedObjectContext? {
         get{
             if _masterContext == nil {
-                let context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
-                guard let persistentStoreCoordinator = self.persistentStoreCoordinator else {
-                    print("Empty persistent store coordinator")
-                    
-                    return nil
-                }
-                
-                context.persistentStoreCoordinator = persistentStoreCoordinator
-                context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-                context.undoManager = nil
+                let context = persistentContainer.newBackgroundContext()
                 _masterContext = context
             }
             return _masterContext
@@ -78,15 +35,7 @@ class CoreDataStack {
     public var mainContext : NSManagedObjectContext? {
         get{
             if _mainContext == nil {
-                let context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.mainQueueConcurrencyType)
-                guard let parentContext = self.masterContext else {
-                    print("No master context!")
-                    return nil
-                }
-                
-                context.parent = parentContext
-                context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-                context.undoManager = nil
+                let context = persistentContainer.viewContext
                 _mainContext = context
             }
             
@@ -98,15 +47,7 @@ class CoreDataStack {
     public var saveContext : NSManagedObjectContext? {
         get{
             if _saveContext == nil {
-                let context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
-                guard let parentContext = self.mainContext else {
-                    print("No master context!")
-                    return nil
-                }
-                
-                context.parent = parentContext
-                context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-                context.undoManager = nil
+                let context = persistentContainer.newBackgroundContext()
                 _saveContext = context
             }
             return _saveContext
