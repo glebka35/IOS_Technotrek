@@ -196,20 +196,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        if(indexPath.row == listOfArticles.count - 1){
-//            let articleRequest = ArticleRequest(category: currentCategory)
-//            articleRequest.getArticles {[weak self] result in
-//                switch result {
-//                case .failure(let error):
-//                    print(error)
-//                case .success(let articles):
-//                    self?.listOfArticles += articles
-//                    self!.downloadImage()
-//                }
-//            }
-//        }
-//    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if(indexPath.row == listOfArticles.count - 1){
+            let articleRequest = ArticleRequest(category: currentCategory)
+            articleRequest.getArticles {[weak self] result in
+                switch result {
+                    case .failure(let error):
+                        print(error)
+                    case .success(let articles):
+                        self?.listOfArticles += articles
+                        self!.imagesToDownload = articles.count
+                        self!.downloadImage()
+                }
+                }
+        }
+    }
     
     func downloadImage() {
         let session = URLSession(configuration: .default)
@@ -238,21 +239,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func saveArticles(articles : [ArticleDetail]){
+        
+        
         if let articleEntity = NSEntityDescription.entity(forEntityName: "Articles", in: self.coreDataStack.masterContext!),
             let categoryEntity = NSEntityDescription.entity(forEntityName: "Categories", in: self.coreDataStack.masterContext!){
-            let categoryForContext = Categories(entity: categoryEntity, insertInto: self.coreDataStack.masterContext)
-
+            var categoryUnwraped : Categories
+            
+            if let categoryForContext = getCategory(categoryName: self.currentCategory){
+                 categoryUnwraped = categoryForContext
+            }
+            else {
+                categoryUnwraped = Categories(entity: categoryEntity, insertInto: self.coreDataStack.masterContext)
+                categoryUnwraped.name = self.currentCategory
+            }
+    
             for article in articles{
+                
                 let articleForContext = Articles(entity: articleEntity, insertInto: self.coreDataStack.masterContext!)
 
-                categoryForContext.name = self.currentCategory
+                
                 articleForContext.author = article.author
                 articleForContext.content = article.content
                 articleForContext.title = article.title
                 articleForContext.date = article.publishedAt
                 articleForContext.image = article.image
-                articleForContext.category = categoryForContext
-                categoryForContext.addToArticle(articleForContext)
+                articleForContext.category = categoryUnwraped
+                categoryUnwraped.addToArticle(articleForContext)
             }
         }
 
@@ -289,6 +301,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         return gettingArticles
+    }
+    
+    func getCategory(categoryName : String)->Categories? {
+        var returnCategory : Categories?
+        let categoryFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Categories")
+        self.coreDataStack.masterContext?.performAndWait {
+            do {
+                let result = try self.coreDataStack.masterContext?.fetch(categoryFetchRequest)
+                result?.forEach({(record) in
+                    guard let category = record as? Categories else {return}
+                    if(category.name == categoryName){
+                        returnCategory = category
+                    }
+                })
+            }
+            catch {
+                print("CoreData error: \(error.localizedDescription)")
+            }
+        }
+        return returnCategory
     }
 }
 
