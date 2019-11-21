@@ -14,24 +14,36 @@ enum ArticleError:Error {
 }
 
 struct ArticleRequest {
-    let resourceURL:URL
-    let API_KEY = "3261fe0c899147bea616ee4669ef54bf"
-    var isDownloadGood = false
     
-    init(category:String) {
+    let API_KEY = "3261fe0c899147bea616ee4669ef54bf"
+    
+    func getArticles (category:String, page: Int, completion: @escaping(Result<[ArticleDetail], ArticleError>) -> Void) {
         let date = Date()
         let format = DateFormatter()
         format.dateFormat = "yyyy-mm-dd"
         let currentDate = format.string(from: date)
         
-        let resourceString = "https://newsapi.org/v2/everything?q=\(category)&from=\(currentDate)&sortBy=publishedAt&apiKey=\(API_KEY)"
+        var urlComponents = URLComponents();
+        urlComponents.scheme = "https"
+        urlComponents.host = "newsapi.org"
+        urlComponents.path = "/v2/everything"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "q", value: category),
+            URLQueryItem(name: "from", value: currentDate),
+            URLQueryItem(name: "sortBy", value: "publishedAt"),
+            URLQueryItem(name: "apiKey", value: API_KEY),
+            URLQueryItem(name: "language", value: "en"),
+            URLQueryItem(name: "page", value: String(page))
+        ]
+        guard let URL = urlComponents.url else
+        {
+            print("Error while getting URL\n")
+            return
+        }
         
-        guard let resourceURL = URL(string: resourceString) else {fatalError()}
-        self.resourceURL = resourceURL
-    }
-    
-    func getArticles (completion: @escaping(Result<[ArticleDetail], ArticleError>) -> Void) {
-        let datatask = URLSession.shared.dataTask(with: resourceURL) {data, _, _ in
+        print(URL.absoluteString)
+        
+        let datatask = URLSession.shared.dataTask(with: URL) {data, _, _ in
             guard let jsonData = data else {
                 completion(.failure(.NoDataAvailable))
                 return

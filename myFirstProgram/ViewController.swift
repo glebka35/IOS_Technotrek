@@ -12,6 +12,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var coreDataStack = CoreDataStack()
     var imagesToDownload = 0
+    let articleRequest = ArticleRequest()
     var countOfDownloadedImages = 0 {
         didSet {
             let articlesToSave = Array(self.listOfArticles[self.listOfArticles.count - self.countOfDownloadedImages...self.listOfArticles.count-1]) as [ArticleDetail]
@@ -30,6 +31,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     private let categories = ["Startups", "Technology", "Business", "Politics", "Favorites"]
     private var currentCategory = "Startups"
     var countOfArticles = 0
+    var pageArticles = 1
     
     var listOfArticles = [ArticleDetail]() {
         didSet {
@@ -39,7 +41,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
-    
     
     @IBOutlet var mainView: UIView!
     @IBOutlet weak var viemForPicker: UIView!
@@ -62,19 +63,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if savedArticles.count > 0 {
             self.listOfArticles = savedArticles
         }
-        let articleRequest = ArticleRequest(category: currentCategory)
-        articleRequest.getArticles {[weak self] result in
+        
+        
+        articleRequest.getArticles(category: currentCategory, page: pageArticles, completion: {[weak self] result in
             switch result {
             case .failure(let error):
                 print(error)
                         
             case .success(let articles):
+                self?.pageArticles += 1
                 self?.listOfArticles += articles
                 self!.imagesToDownload = articles.count
                 self!.downloadImage()
             }
-        }
-        
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,6 +130,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.countOfArticles = 0
+        self.pageArticles = 1
         currentCategory = categories[row]
         menuButton.setTitle(currentCategory, for: .normal)
         listOfArticles.removeAll()
@@ -136,17 +139,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.listOfArticles = savedArticles
         }
         
-        let articleRequest = ArticleRequest(category: currentCategory)
-        articleRequest.getArticles {[weak self] result in
-            switch result {
-                case .failure(let error):
-                    print(error)
-                case .success(let articles):
-                    self?.listOfArticles = articles
-                    self!.imagesToDownload = articles.count
-                    self!.downloadImage()
-            }
-            }
+        
+        articleRequest.getArticles(category: currentCategory, page: pageArticles) {[weak self] result in
+        switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let articles):
+                self?.pageArticles += 1
+                self?.listOfArticles = articles
+                self!.imagesToDownload = articles.count
+                self!.downloadImage()
+        }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -198,17 +202,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if(indexPath.row == listOfArticles.count - 1){
-            let articleRequest = ArticleRequest(category: currentCategory)
-            articleRequest.getArticles {[weak self] result in
-                switch result {
-                    case .failure(let error):
-                        print(error)
-                    case .success(let articles):
-                        self?.listOfArticles += articles
-                        self!.imagesToDownload = articles.count
-                        self!.downloadImage()
-                }
-                }
+            articleRequest.getArticles(category: currentCategory, page: pageArticles) {[weak self] result in
+            switch result {
+                case .failure(let error):
+                    print(error)
+                case .success(let articles):
+                    self?.pageArticles += 1
+                    self?.listOfArticles += articles
+                    self!.imagesToDownload = articles.count
+                    self!.downloadImage()
+            }
+            }
         }
     }
     
