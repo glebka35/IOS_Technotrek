@@ -9,35 +9,30 @@ import UIKit
 import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate{
-    
-    var coreDataStack = CoreDataStack()
-    var imagesToDownload = 0
+    private let categories = ["Startups", "Technology", "Business", "Politics", "Favorites"]
     let articleRequest = ArticleRequest()
-    var countOfDownloadedImages = 0 {
-        didSet {
-            let articlesToSave = Array(self.listOfArticles[self.listOfArticles.count - self.countOfDownloadedImages...self.listOfArticles.count-1]) as [ArticleDetail]
-            if self.countOfDownloadedImages == imagesToDownload{
-                saveArticles(articles: articlesToSave)
-                self.countOfDownloadedImages = 0
-            }
-        }
-    }
-    
-    @IBOutlet weak var mainTable: UITableView!
-    
     let blurredEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     let blurredEffectViewPicker = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     
-    private let categories = ["Startups", "Technology", "Business", "Politics", "Favorites"]
     private var currentCategory = "Startups"
+    var coreDataStack = CoreDataStack()
+    var imagesToDownload = 0
     var countOfArticles = 0
     var pageArticles = 1
-    
     var listOfArticles = [ArticleDetail]() {
         didSet {
             
             DispatchQueue.main.async {
                 self.mainTable.reloadData()
+            }
+        }
+    }
+    var countOfDownloadedImages = 0 {
+        didSet {
+            if self.countOfDownloadedImages == imagesToDownload{
+            let articlesToSave = Array(self.listOfArticles[self.listOfArticles.count - self.countOfDownloadedImages...self.listOfArticles.count-1]) as [ArticleDetail]
+                saveArticles(articles: articlesToSave)
+                self.countOfDownloadedImages = 0
             }
         }
     }
@@ -50,9 +45,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var UiViewBar: UIView!
     @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var mainTable: UITableView!
     
     override func viewDidLoad() {
-        // Delete UserDefaults
+//        Delete UserDefaults
 //        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
 //        UserDefaults.standard.synchronize()
         
@@ -63,7 +59,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if savedArticles.count > 0 {
             self.listOfArticles = savedArticles
         }
-        
         
         articleRequest.getArticles(category: currentCategory, page: pageArticles, completion: {[weak self] result in
             switch result {
@@ -83,31 +78,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         UiViewBar.backgroundColor = UIColor.clear
         blurredEffectView.frame = UiViewBar.bounds
         UiViewBar.addSubview(blurredEffectView)
+        UiViewBar.bringSubviewToFront(menuButton)
         
         myTableView.contentInset = UIEdgeInsets(top: 25, left: 0, bottom: 0, right: 0)
         
-        UiViewBar.bringSubviewToFront(menuButton)
-        menuButton.backgroundColor = UIColor.clear
-        menuImage.image = UIImage(named: "lines2.png")
-        
         UiViewBar.bringSubviewToFront(profileButton)
         profileButton.backgroundColor = UIColor.clear
-        UiViewBar.bringSubviewToFront(menuImage)
         
         pickerView.backgroundColor = UIColor.clear
-        viemForPicker.backgroundColor = UIColor.clear
+        
         blurredEffectViewPicker.frame = viemForPicker.bounds
+        viemForPicker.backgroundColor = UIColor.clear
         viemForPicker.addSubview(blurredEffectViewPicker)
         viemForPicker.bringSubviewToFront(pickerView)
         viemForPicker.layer.cornerRadius = 20
-
         viemForPicker.clipsToBounds = true
+        
         menuButton.setTitle(currentCategory, for: .normal)
+        menuButton.backgroundColor = UIColor.clear
+        
+        menuImage.image = UIImage(named: "lines2.png")
+        UiViewBar.bringSubviewToFront(menuImage)
     }
     
-
     @IBAction func touchMenuButton(_ sender: Any) {
-        
         if(viemForPicker.isHidden){
             viemForPicker.isHidden = false
         }
@@ -115,13 +109,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             viemForPicker.isHidden = true
         }
     }
-   
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return categories.count
-    }
     
+    @IBAction func touchProfileButton(_ sender: Any) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        if let profileVC = sb.instantiateViewController(withIdentifier: "ProfileVC") as? ProfileViewController {
+            self.navigationController?.pushViewController(profileVC, animated: true)
+        }
+    }
+}
+
+//MARK: - Picker Categories
+extension ViewController {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return categories.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -133,26 +137,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.pageArticles = 1
         currentCategory = categories[row]
         menuButton.setTitle(currentCategory, for: .normal)
-        listOfArticles.removeAll()
+        self.listOfArticles.removeAll()
         let savedArticles = getArticles(category: currentCategory)
         if savedArticles.count > 0 {
             self.listOfArticles = savedArticles
         }
         
-        
         articleRequest.getArticles(category: currentCategory, page: pageArticles) {[weak self] result in
-        switch result {
-            case .failure(let error):
-                print(error)
-            case .success(let articles):
-                self?.pageArticles += 1
-                self?.listOfArticles = articles
-                self!.imagesToDownload = articles.count
-                self!.downloadImage()
-        }
+            switch result {
+                case .failure(let error):
+                    print(error)
+                case .success(let articles):
+                    self?.pageArticles += 1
+                    self?.listOfArticles = articles
+                    self!.imagesToDownload = articles.count
+                    self!.downloadImage()
+            }
         }
     }
-    
+}
+
+//MARK: - Main Table View
+extension ViewController {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return listOfArticles.count
     }
@@ -190,16 +196,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     }
     
-    
-    @IBAction func touchProfileButton(_ sender: Any) {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        if let profileVC = sb.instantiateViewController(withIdentifier: "ProfileVC") as? ProfileViewController {
-            self.navigationController?.pushViewController(profileVC, animated: true)
-        
-        }
-    }
-    
-    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if(indexPath.row == listOfArticles.count - 1){
             articleRequest.getArticles(category: currentCategory, page: pageArticles) {[weak self] result in
@@ -216,35 +212,42 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+}
+
+// MARK: - HTTP
+extension ViewController {
     func downloadImage() {
         let session = URLSession(configuration: .default)
         if(self.listOfArticles.count > 0){
             for i in self.listOfArticles.count - self.imagesToDownload...self.listOfArticles.count - 1 {
-                let URLToImage = self.listOfArticles[i].urlToImage
+                print(i)
+                let URLToImageString = self.listOfArticles[i].urlToImage
                 self.listOfArticles[i].image = UIImage(named: "noPicture.png")?.pngData()
-                if(URLToImage != nil && URLToImage != "") {
-                    let getImageFromUrl = session.dataTask(with: URL(string: URLToImage!)!) { (data, _, _) in
-                        DispatchQueue.main.async {
-                            self.countOfDownloadedImages += 1
-                            print(i)
+                if let unwrapedURLToImageString = URLToImageString{
+                    if let imageUrl = URL(string: unwrapedURLToImageString){
+                        let getImageFromUrl = session.dataTask(with: imageUrl) { (data, _, _) in
+                            DispatchQueue.main.async {
+                                self.countOfDownloadedImages += 1
+                            }
+                            guard let imageData = data else { return }
+                            guard let image = UIImage(data: imageData) else {return}
+                            self.listOfArticles[i].image = image.pngData()
                         }
-                        guard let imageData = data else { return }
-                        guard let image = UIImage(data: imageData) else {return}
-                        self.listOfArticles[i].image = image.pngData()
+                        getImageFromUrl.resume()
+                    } else {
+                        self.countOfDownloadedImages += 1
                     }
-                    getImageFromUrl.resume()
-                } else {
+                }else {
                     self.countOfDownloadedImages += 1
                 }
-                
             }
-            //self.countOfArticles = self.listOfArticles.count
         }
     }
-    
+}
+
+// MARK: - Core Data
+extension ViewController {
     func saveArticles(articles : [ArticleDetail]){
-        
-        
         if let articleEntity = NSEntityDescription.entity(forEntityName: "Articles", in: self.coreDataStack.masterContext!),
             let categoryEntity = NSEntityDescription.entity(forEntityName: "Categories", in: self.coreDataStack.masterContext!){
             var categoryUnwraped : Categories
@@ -258,10 +261,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
     
             for article in articles{
-                
                 let articleForContext = Articles(entity: articleEntity, insertInto: self.coreDataStack.masterContext!)
 
-                
                 articleForContext.author = article.author
                 articleForContext.content = article.content
                 articleForContext.title = article.title
@@ -271,7 +272,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 categoryUnwraped.addToArticle(articleForContext)
             }
         }
-
         self.coreDataStack.performSave(context:self.coreDataStack.masterContext!)
     }
     

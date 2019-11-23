@@ -35,15 +35,14 @@ struct ArticleRequest {
             URLQueryItem(name: "language", value: "en"),
             URLQueryItem(name: "page", value: String(page))
         ]
-        guard let URL = urlComponents.url else
+
+        guard let articlesURL = urlComponents.url else
         {
             print("Error while getting URL\n")
             return
         }
         
-        print(URL.absoluteString)
-        
-        let datatask = URLSession.shared.dataTask(with: URL) {data, _, _ in
+        let datatask = URLSession.shared.dataTask(with: articlesURL) {data, _, _ in
             guard let jsonData = data else {
                 completion(.failure(.NoDataAvailable))
                 return
