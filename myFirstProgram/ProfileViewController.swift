@@ -115,7 +115,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         activityIndicatorView.frame = self.view.frame
         activityIndicatorView.center = self.view.center
         backMenuButton.adjustsImageWhenHighlighted = false
-    
+        
+        profileImage.image = person.image
+        nameTextField.text = person.name
     }
     
     
@@ -160,9 +162,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         choosePhotoButton.clipsToBounds = true
         
         profileImage.layer.cornerRadius = 20
-        profileImage.image = person.image
-        
-        nameTextField.text = person.name
     }
     
     

@@ -35,6 +35,8 @@ class ArticleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         returnButton.adjustsImageWhenHighlighted = false;
+        textView.text = text
+        imageVIew.image = image
     }
     
     
@@ -44,21 +46,16 @@ class ArticleViewController: UIViewController {
         imageVIew.layer.cornerRadius = 20
         textView.isEditable = false
         
-        textView.text = text
-        imageVIew.image = image
         saveButton.layer.cornerRadius = 7
         saveButton.layer.borderColor = UIColor.black.cgColor
         saveButton.layer.borderWidth = 1.5
         saveButton.clipsToBounds = true
         self.view.bringSubviewToFront(saveButton)
-        
     }
     
     @IBAction func returnButton(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
-    
-    
     
     @IBAction func pressSaveButton(_ sender: Any) {
         activityIndicatorView.startAnimating()

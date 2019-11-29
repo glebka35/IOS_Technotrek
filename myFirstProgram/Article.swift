@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ArticleResponse: Decodable {
     let articles: [ArticleDetail]
