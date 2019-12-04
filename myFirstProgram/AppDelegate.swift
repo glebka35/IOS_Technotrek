@@ -8,19 +8,28 @@
 
 import UIKit
 
+class GUWindow:UIWindow{
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if(traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle){
+            ThemeManager.sharedInstance().themeDidChange()
+        }
+    }
+}
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UITableViewDelegate {
 
     var window: UIWindow?
-
+    var Storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+    var initialViewController : UIViewController?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        window = GUWindow()
+        initialViewController = Storyboard.instantiateInitialViewController()
+        window?.rootViewController = initialViewController
+        window?.makeKeyAndVisible()
         return true
     }
-    
-    // MARK: - Core Data stack
-
-    
-
 }

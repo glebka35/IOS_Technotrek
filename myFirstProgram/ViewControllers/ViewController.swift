@@ -13,9 +13,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let articleRequest = ArticleRequest()
     let blurredEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     let blurredEffectViewPicker = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    let instanceThemeManager = ThemeManager.sharedInstance()
     
-    private var currentCategory = "Startups"
-    var chosenCategory = ""
+    var currentCategory = "Startups"
+    var chosenCategory = "Startups"
     var coreDataStack = CoreDataStack()
     var imagesToDownload = 0
     var countOfArticles = 0
@@ -48,10 +49,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var mainTable: UITableView!
     @IBOutlet weak var viewForGesture: UIView!
     
+    
     override func viewDidLoad() {
 //        Delete UserDefaults
 //        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
 //        UserDefaults.standard.synchronize()
+        
+
+//        NotificationCenter.default.addObserver(self, selector: #selector(setToDark(notification:)), name: .dark, object: nil)
+                
         
         super.viewDidLoad()
         self.coreDataStack = CoreDataStack()
@@ -61,9 +67,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.listOfArticles = savedArticles
         }
         downloadArticles()
+        print(workWithCppClass(myString: currentCategory))
+        
     }
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         UiViewBar.backgroundColor = UIColor.clear
@@ -78,6 +84,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         pickerView.backgroundColor = UIColor.clear
         
+        
         blurredEffectViewPicker.frame = viemForPicker.bounds
         viemForPicker.backgroundColor = UIColor.clear
         viemForPicker.addSubview(blurredEffectViewPicker)
@@ -87,6 +94,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         menuButton.setTitle(currentCategory, for: .normal)
         menuButton.backgroundColor = UIColor.clear
+//        myTableView.addSubview(instanceThemeManager!)
+//        myTableView.bringSubviewToFront(instanceThemeManager!)
     }
     
     @IBAction func touchProfileButton(_ sender: Any) {
@@ -154,6 +163,11 @@ extension ViewController {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         chosenCategory = categories[row]
         menuButton.setTitle(chosenCategory, for: .normal)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let attributedString = NSAttributedString(string: categories[row], attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+        return attributedString
     }
 }
 //MARK: - Main Table View
@@ -326,3 +340,26 @@ extension ViewController {
     }
 }
 
+extension Notification.Name {
+    static let dark = Notification.Name("dark")
+    static let light = Notification.Name("light")
+}
+
+extension ViewController{
+    @objc func setToDark(notification: NSNotification) {
+        
+    }
+    
+    func setToLight(notification: NSNotification) {
+    
+    }
+}
+
+// MARK: - Work with cpp class
+// This function is called in the end of viewDidLoad method
+extension ViewController {
+    func workWithCppClass(myString : String) -> String {
+        let instanceCharDeleteManager = LastCharDeleteManager()
+        return instanceCharDeleteManager.doWork(myString)
+    }
+}

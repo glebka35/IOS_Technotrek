@@ -127,18 +127,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewWillAppear(animated)
         categoriesButton.layer.cornerRadius = 7
         categoriesButton.layer.borderWidth = 1.5
-        categoriesButton.layer.borderColor = UIColor.black.cgColor
+        categoriesButton.layer.borderColor = UIColor.systemGray.cgColor
         categoriesButton.clipsToBounds = true
         
         buttonGCD.layer.cornerRadius = 7
         buttonGCD.layer.borderWidth = 1.5
-        buttonGCD.layer.borderColor = UIColor.black.cgColor
+        buttonGCD.layer.borderColor = UIColor.systemGray.cgColor
         buttonGCD.clipsToBounds = true
         
         buttonNSOperation.layer.cornerRadius = 7
         buttonNSOperation.layer.borderWidth = 1.5
-        buttonNSOperation.layer.borderColor = UIColor.black.cgColor
+        buttonNSOperation.layer.borderColor = UIColor.systemGray.cgColor
         buttonNSOperation.clipsToBounds = true
+    
         
         viewCategories.isHidden = true
         
@@ -147,7 +148,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         viewCategories.addSubview(blurredEffectView)
         
         viewCategories.bringSubviewToFront(tableView)
-        
         viewCategories.bringSubviewToFront(categoriesLabel)
         
         viewCategories.bringSubviewToFront(backToProfile)
@@ -169,11 +169,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = tableView.cellForRow(at: indexPath) as! TableViewCellCategories
         if cell.checkMarkImage.isHidden{
             cell.checkMarkImage.isHidden = false
-            cell.categoriesLabel.textColor = UIColor.black
+//            cell.categoriesLabel.textColor = UIColor.black
             person.favoriteCategories![indexPath.row] = true
         } else {
             cell.checkMarkImage.isHidden = true
-            cell.categoriesLabel.textColor = UIColor.darkGray
+//            cell.categoriesLabel.textColor = UIColor.darkGray
             person.favoriteCategories![indexPath.row] = false
         }
         tableView.deselectRow(at: indexPath, animated: false)
