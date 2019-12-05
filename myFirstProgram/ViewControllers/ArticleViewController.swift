@@ -39,8 +39,6 @@ class ArticleViewController: UIViewController {
         imageVIew.image = image
     }
     
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         imageVIew.layer.cornerRadius = 20

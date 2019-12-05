@@ -8,22 +8,33 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate{
+class ViewController: UIViewController{
     private let categories = ["Startups", "Technology", "Business", "Politics", "Favorites", "Cars"]
-    let articleRequest = ArticleRequest()
+    let articleDownloader = GUArticleDownloaderImpl()
+    let coreDataManager = GUCoreDataManagerImpl()
     let blurredEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     let blurredEffectViewPicker = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     let instanceThemeManager = ThemeManager.sharedInstance()
     
     var currentCategory = "Startups"
     var chosenCategory = "Startups"
-    var coreDataStack = CoreDataStack()
     var imagesToDownload = 0
-    var countOfArticles = 0
+    var countOfArticles = 0 {
+        didSet{
+            isNewsAppeared += Array(repeating: false, count: countOfArticles - isNewsAppeared.count)
+        }
+    }
     var pageArticles = 1
+    var isFetchInProgress = false
+    var isGetArticleFromCoreData = true {
+        didSet {
+            pageArticles = 1
+            takeDataFromCoreDataOrInternet()
+        }
+    }
+    var isNewsAppeared : [Bool] = []
     var listOfArticles = [ArticleDetail]() {
         didSet {
-            
             DispatchQueue.main.async {
                 self.mainTable.reloadData()
             }
@@ -33,7 +44,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         didSet {
             if self.countOfDownloadedImages == imagesToDownload{
             let articlesToSave = Array(self.listOfArticles[self.listOfArticles.count - self.countOfDownloadedImages...self.listOfArticles.count-1]) as [ArticleDetail]
-                saveArticles(articles: articlesToSave)
+                DispatchQueue.global(qos: .default).async {[weak self] in
+                    guard let self=self else {return}
+                    self.saveArticles(articles: articlesToSave)
+                }
                 self.countOfDownloadedImages = 0
             }
         }
@@ -57,18 +71,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
 
 //        NotificationCenter.default.addObserver(self, selector: #selector(setToDark(notification:)), name: .dark, object: nil)
-                
-        
         super.viewDidLoad()
-        self.coreDataStack = CoreDataStack()
-        
-        let savedArticles = getArticles(category: currentCategory)
-        if savedArticles.count > 0 {
-            self.listOfArticles = savedArticles
-        }
-        downloadArticles()
+        isGetArticleFromCoreData = true
         print(workWithCppClass(myString: currentCategory))
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,7 +88,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         profileButton.backgroundColor = UIColor.clear
         
         pickerView.backgroundColor = UIColor.clear
-        
         
         blurredEffectViewPicker.frame = viemForPicker.bounds
         viemForPicker.backgroundColor = UIColor.clear
@@ -106,10 +110,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 }
 
-
-
 //MARK: - Picker Categories
-extension ViewController {
+extension ViewController : UIPickerViewDelegate, UIPickerViewDataSource {
     @IBAction func touchMenuButton(_ sender: Any) {
         if(viemForPicker.isHidden){
             viemForPicker.isHidden = false
@@ -118,34 +120,14 @@ extension ViewController {
         else{
             viemForPicker.isHidden = true
             viewForGesture.isHidden = true
-            if(chosenCategory != currentCategory){
-                currentCategory = chosenCategory
-                self.countOfArticles = 0
-                self.pageArticles = 1
-                self.listOfArticles.removeAll()
-                let savedArticles = getArticles(category: currentCategory)
-                if savedArticles.count > 0 {
-                    self.listOfArticles = savedArticles
-                }
-                downloadArticles()
-            }
+            changeCategory()
         }
     }
     
     @IBAction func closePickerView(_ sender: UITapGestureRecognizer) {
         viemForPicker.isHidden = true
         viewForGesture.isHidden = true
-        if(chosenCategory != currentCategory){
-            currentCategory = chosenCategory
-            self.countOfArticles = 0
-            self.pageArticles = 1
-            self.listOfArticles.removeAll()
-            let savedArticles = getArticles(category: currentCategory)
-            if savedArticles.count > 0 {
-                self.listOfArticles = savedArticles
-            }
-            downloadArticles()
-        }
+        changeCategory()
     }
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -169,9 +151,19 @@ extension ViewController {
         let attributedString = NSAttributedString(string: categories[row], attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         return attributedString
     }
+    
+    func changeCategory(){
+        if(chosenCategory != currentCategory){
+                currentCategory = chosenCategory
+                self.isNewsAppeared.removeAll()
+                self.pageArticles = 1
+                self.listOfArticles.removeAll()
+                takeDataFromCoreDataOrInternet()
+        }
+    }
 }
 //MARK: - Main Table View
-extension ViewController {
+extension ViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return listOfArticles.count
     }
@@ -197,8 +189,7 @@ extension ViewController {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         if let articleVC = sb.instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController
         {
-            
-            articleVC.text = listOfArticles[indexPath.row].content ?? ""
+            articleVC.text = listOfArticles[indexPath.row].description ?? ""
             articleVC.image = UIImage(data:listOfArticles[indexPath.row].image!)
             articleVC.currentCategory = self.currentCategory
             articleVC.articletTitle = listOfArticles[indexPath.row].title ?? "No title"
@@ -207,30 +198,57 @@ extension ViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if(indexPath.row == listOfArticles.count - 1){
-            downloadArticles()
-        }
-    }
-    
-}
-
-// MARK: - HTTP
-extension ViewController {
-    func downloadArticles() {
-        articleRequest.getArticles(category: currentCategory, page: pageArticles) {[weak self] result in
-            switch result {
-                case .failure(let error):
-                    print(error)
-                case .success(let articles):
-                    self?.pageArticles += 1
-                    self?.listOfArticles += articles
-                    self?.imagesToDownload = articles.count
-                    self?.downloadImage()
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let rowsAmount = listOfArticles.count
+        guard let indexPathForVisibleRows = mainTable.indexPathsForVisibleRows else {return}
+        for indexPath in indexPathForVisibleRows{
+            if(indexPath.row == rowsAmount-1){
+                takeDataFromCoreDataOrInternet()
             }
         }
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let indexPathForVisibleRows = mainTable.indexPathsForVisibleRows else {return}
+        for indexPathVisible in indexPathForVisibleRows{
+            if(!isNewsAppeared[indexPath.row] && indexPath == indexPathVisible){
+                isNewsAppeared[indexPath.row] = true
+                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, -500, 10, 0)
+                cell.layer.transform = rotationTransform
+                UIView.animate(withDuration: 0.5) {
+                    cell.layer.transform = CATransform3DIdentity
+                }
+            }
+        }
+    }
+}
+
+// MARK: - HTTP
+extension ViewController{
+    func downloadArticles() {
+        articleDownloader.downloadArticles(category: currentCategory, page: pageArticles) {[weak self] result in
+            guard let self = self else {return}
+            switch result {
+                case .failure(let error):
+                    print(error)
+                    DispatchQueue.main.async {
+                        self.isFetchInProgress = false
+                }
+                case .success(let articles):
+                    DispatchQueue.main.async {
+                        self.pageArticles += 1
+                        self.isFetchInProgress = false
+                        self.listOfArticles += articles
+                        self.countOfArticles = self.listOfArticles.count
+                        self.imagesToDownload = articles.count
+                        self.downloadImage()
+                    }
+            }
+        }
+    }
+}
+
+extension ViewController:GUImageDownloader{
     func downloadImage() {
         let session = URLSession(configuration: .default)
         if(self.listOfArticles.count > 0){
@@ -240,12 +258,14 @@ extension ViewController {
                 if let unwrapedURLToImageString = URLToImageString,
                     let imageUrl = URL(string: unwrapedURLToImageString){
                         let getImageFromUrl = session.dataTask(with: imageUrl) { (data, _, _) in
-                            DispatchQueue.main.sync {
+                            DispatchQueue.main.async {
                                 self.countOfDownloadedImages += 1
                             }
                             guard let imageData = data else { return }
                             if(self.listOfArticles.count > 0){
-                                self.listOfArticles[i].image = imageData
+                                DispatchQueue.main.async {
+                                    self.listOfArticles[i].image = imageData
+                                }
                             }
                         }
                         getImageFromUrl.resume()
@@ -257,10 +277,11 @@ extension ViewController {
     }
 }
 
+
 // MARK: - Core Data
 extension ViewController {
     func saveArticles(articles : [ArticleDetail]){
-        guard let masterContext = self.coreDataStack.masterContext else {return}
+        guard let masterContext = self.coreDataManager.masterContext else {return}
         if let articleEntity = NSEntityDescription.entity(forEntityName: "Articles", in: masterContext),
             let categoryEntity = NSEntityDescription.entity(forEntityName: "Categories", in: masterContext){
             var categoryUnwraped : Categories
@@ -269,7 +290,7 @@ extension ViewController {
                  categoryUnwraped = categoryForContext
             }
             else {
-                categoryUnwraped = Categories(entity: categoryEntity, insertInto: self.coreDataStack.masterContext)
+                categoryUnwraped = Categories(entity: categoryEntity, insertInto: self.coreDataManager.masterContext)
                 categoryUnwraped.name = self.currentCategory
             }
     
@@ -280,51 +301,75 @@ extension ViewController {
                 articleForContext.title = article.title
                 articleForContext.date = article.publishedAt
                 articleForContext.image = article.image
+                articleForContext.descr = article.description
                 articleForContext.category = categoryUnwraped
                 categoryUnwraped.addToArticle(articleForContext)
             }
         }
-        self.coreDataStack.performSave(context:masterContext)
+        self.coreDataManager.performSave(context:masterContext)
     }
     
-    func getArticles(category: String) -> [ArticleDetail]{
-        var gettingArticles = [ArticleDetail]()
+    func createFetchRequest(category: String) -> NSFetchedResultsController<NSFetchRequestResult>?{
         let newsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Articles")
-        self.coreDataStack.saveContext?.performAndWait {
-            do {
-                let result = try self.coreDataStack.saveContext?.fetch(newsFetchRequest)
-                result?.forEach({ (record) in
-                    var article = ArticleDetail()
-                    guard let news = record as? Articles else {
-                        print("Error while get record")
-                        return
-                    }
-                    if let categorySaved = news.category as Categories?{
-                        if categorySaved.name == category{
-                            article.content = news.content
-                            article.author = news.author
-                            article.image = news.image
-                            article.title = news.title
-                            article.publishedAt = news.date
-                            gettingArticles.append(article)
-                        }
-                    }
-                })
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        let predicate = NSPredicate(format: "category.name == %@", category)
+        newsFetchRequest.sortDescriptors = [sortDescriptor]
+        newsFetchRequest.predicate = predicate
+        newsFetchRequest.propertiesToFetch = ["content", "author", "image", "title", "date"]
+        newsFetchRequest.fetchLimit = 20
+        newsFetchRequest.fetchOffset = 20 * (self.pageArticles - 1)
+        guard let context = self.coreDataManager.masterContext else {return nil}
+        let frc = NSFetchedResultsController(fetchRequest: newsFetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        return frc
+    }
+    
+    func getArticles(category: String){
+        
+        guard let frc = createFetchRequest(category: category) else {return}
+        var gotArticles : [ArticleDetail] = []
+        do{
+            _ = try frc.performFetch()
+            let result = frc.fetchedObjects
+            
+            result?.forEach({ (record) in
+                guard let news = record as? Articles else {return}
+                var article = ArticleDetail()
+                article.author = news.author
+                article.content = news.content
+                article.image = news.image
+                article.title = news.title
+                article.publishedAt = news.date
+                article.description = news.descr
+                gotArticles.append(article)
+            })
+        }
+        catch{
+            DispatchQueue.main.async {
+                self.isFetchInProgress = false
             }
-            catch
-            {
-                print("CoreData error: \(error.localizedDescription)")
+            print("CoreDataError: \(error.localizedDescription)")
+        }
+        if(!gotArticles.isEmpty){
+            DispatchQueue.main.async {
+                self.isFetchInProgress = false
+                self.listOfArticles += gotArticles
+                self.countOfArticles = self.listOfArticles.count
+                self.pageArticles += 1
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.isFetchInProgress = false
+                self.isGetArticleFromCoreData = false
             }
         }
-        return gettingArticles
     }
     
     func getCategory(categoryName : String)->Categories? {
         var returnCategory : Categories?
         let categoryFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Categories")
-        self.coreDataStack.masterContext?.performAndWait {
+        self.coreDataManager.masterContext?.performAndWait {
             do {
-                let result = try self.coreDataStack.masterContext?.fetch(categoryFetchRequest)
+                let result = try self.coreDataManager.masterContext?.fetch(categoryFetchRequest)
                 result?.forEach({(record) in
                     guard let category = record as? Categories else {return}
                     if(category.name == categoryName){
@@ -338,13 +383,11 @@ extension ViewController {
         }
         return returnCategory
     }
+    
+    
 }
 
-extension Notification.Name {
-    static let dark = Notification.Name("dark")
-    static let light = Notification.Name("light")
-}
-
+//MARK: - ThemeManager (not use in this version)
 extension ViewController{
     @objc func setToDark(notification: NSNotification) {
         
@@ -355,11 +398,32 @@ extension ViewController{
     }
 }
 
+extension Notification.Name {
+    static let dark = Notification.Name("dark")
+    static let light = Notification.Name("light")
+}
+
 // MARK: - Work with cpp class
 // This function is called in the end of viewDidLoad method
 extension ViewController {
     func workWithCppClass(myString : String) -> String {
         let instanceCharDeleteManager = LastCharDeleteManager()
         return instanceCharDeleteManager.doWork(myString)
+    }
+}
+
+extension ViewController{
+    func takeDataFromCoreDataOrInternet(){
+        if(!isFetchInProgress){
+            isFetchInProgress = true
+            if(!self.isGetArticleFromCoreData){
+                downloadArticles()
+            } else {
+                DispatchQueue.global(qos: .default).async {[weak self] in
+                    guard let self = self else {return}
+                    self.getArticles(category: self.currentCategory)
+                }
+            }
+        }
     }
 }

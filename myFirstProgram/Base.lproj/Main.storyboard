@@ -31,8 +31,8 @@
                                                     <rect key="frame" x="20" y="10" width="374" height="280"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GdG-Lx-uEj">
-                                                    <rect key="frame" x="30" y="241" width="354" height="43"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="36"/>
+                                                    <rect key="frame" x="30" y="254" width="354" height="30"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -62,7 +62,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtt-sZ-4Kr" customClass="ButtonCategories" customModule="News__" customModuleProvider="target">
-                                        <rect key="frame" x="110" y="34" width="194" height="35"/>
+                                        <rect key="frame" x="67" y="34" width="237" height="35"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="dRt-Jf-jUH"/>
@@ -95,9 +95,8 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="dtt-sZ-4Kr" firstAttribute="top" secondItem="7XI-HV-EeU" secondAttribute="top" constant="34" id="0aW-NT-LrJ"/>
-                                    <constraint firstItem="dtt-sZ-4Kr" firstAttribute="centerX" secondItem="7XI-HV-EeU" secondAttribute="centerX" id="Dnw-Db-LqR"/>
+                                    <constraint firstItem="dtt-sZ-4Kr" firstAttribute="leading" secondItem="7XI-HV-EeU" secondAttribute="leading" constant="67" id="Cea-0q-eCG"/>
                                     <constraint firstAttribute="trailing" secondItem="SjS-bg-9lQ" secondAttribute="trailing" constant="30" id="KUY-Xm-BmQ"/>
-                                    <constraint firstItem="dtt-sZ-4Kr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7XI-HV-EeU" secondAttribute="leading" id="SeW-Zj-mJE"/>
                                     <constraint firstAttribute="height" constant="70" id="fVW-ta-Mbm"/>
                                     <constraint firstItem="SjS-bg-9lQ" firstAttribute="top" secondItem="7XI-HV-EeU" secondAttribute="top" constant="40" id="tuh-wP-nB9"/>
                                     <constraint firstItem="SjS-bg-9lQ" firstAttribute="leading" secondItem="dtt-sZ-4Kr" secondAttribute="trailing" constant="55" id="uJI-PD-FRP"/>
@@ -370,6 +369,7 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="qGM-JK-BLj">
                                                             <rect key="frame" x="358" y="32" width="36" height="36"/>
+                                                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="36" id="ppY-B4-qMY"/>
                                                             </constraints>

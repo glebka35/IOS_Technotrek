@@ -8,21 +8,14 @@
 
 import Foundation
 
-enum ArticleError:Error {
-    case NoDataAvailable
-    case canNotProcessData
-}
-
-struct ArticleRequest {
-    
+class GUArticleDownloaderImpl : GUArticleDownloader {
     let API_KEY = "3261fe0c899147bea616ee4669ef54bf"
     
-    func getArticles (category:String, page: Int, completion: @escaping(Result<[ArticleDetail], ArticleError>) -> Void) {
+    func makeURL(category:String, page: Int) -> URL?{
         let date = Date()
         let format = DateFormatter()
         format.dateFormat = "yyyy-mm-dd"
         let currentDate = format.string(from: date)
-        
         var urlComponents = URLComponents();
         urlComponents.scheme = "https"
         urlComponents.host = "newsapi.org"
@@ -35,12 +28,16 @@ struct ArticleRequest {
             URLQueryItem(name: "language", value: "en"),
             URLQueryItem(name: "page", value: String(page))
         ]
-
         guard let articlesURL = urlComponents.url else
         {
             print("Error while getting URL\n")
-            return
+            return nil
         }
+        return articlesURL
+    }
+    
+    func downloadArticles (category:String, page: Int, completion: @escaping(Result<[ArticleDetail], ArticleError>) -> Void) {
+        guard let articlesURL = makeURL(category: category, page: page) else {return}
         
         let datatask = URLSession.shared.dataTask(with: articlesURL) {data, _, _ in
             guard let jsonData = data else {

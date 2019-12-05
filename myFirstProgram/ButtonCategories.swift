@@ -13,8 +13,9 @@ class ButtonCategories: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         if imageView != nil {
-            imageEdgeInsets = UIEdgeInsets(top: 8, left: (bounds.width - 45), bottom: 8, right: 5)
-            titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: (imageView?.frame.width)!)
+            imageEdgeInsets = UIEdgeInsets(top: 10, left: (bounds.width - 45), bottom: 6, right: 5)
+            titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: (imageView?.frame.width)!-15)
+            
         }
     }
     

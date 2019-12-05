@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class CoreDataStack {
+class GUCoreDataManagerImpl:GUCoreDataManager {
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "myFirstProgram")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -64,9 +64,9 @@ class CoreDataStack {
                 catch {
                     print("Context save error: \(error)")
                 }
-                
+                guard let self = self else {return}
                 if let parent = context.parent {
-                    self?.performSave(context: parent)
+                    self.performSave(context: parent)
                 }
                 
                 }

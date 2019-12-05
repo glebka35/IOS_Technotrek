@@ -14,24 +14,58 @@ struct personInfo {
     var favoriteCategories: [Bool]?
 }
 
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, UITextFieldDelegate,UINavigationControllerDelegate {
     
     var person = personInfo()
     let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+    let blurredEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    private let categories = ["Startups", "Technology", "Business", "Politics"]
+    
     @IBOutlet weak var buttonNSOperation: UIButton!
     @IBOutlet weak var buttonGCD: UIButton!
     @IBOutlet weak var choosePhotoButton: UIButton!
     @IBOutlet weak var backToProfile: UIButton!
     @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var backMenuButton: UIButton!
-    let blurredEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-    private let categories = ["Startups", "Technology", "Business", "Politics"]
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var viewCategories: UIView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var categoriesButton: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let profileImageData = UserDefaults.standard.object(forKey: "profileImage"){
+            person.image = UIImage(data: profileImageData as! Data)
+        }
+        else{
+            person.image = UIImage(named: "tim-cook.jpg")
+        }
+        
+        if let profileName = UserDefaults.standard.string(forKey: "profileName"){
+            person.name = profileName
+        }
+        
+        if let profileCategories = UserDefaults.standard.object(forKey: "favoriteCategories"){
+            person.favoriteCategories = profileCategories as? [Bool]
+        }
+        else{
+            person.favoriteCategories = []
+            for _ in 0...categories.count {
+                person.favoriteCategories?.append(false)
+            }
+        }
+        
+        activityIndicatorView.color = UIColor.black
+        self.view.addSubview(activityIndicatorView)
+        self.view.bringSubviewToFront(activityIndicatorView)
+        activityIndicatorView.frame = self.view.frame
+        activityIndicatorView.center = self.view.center
+        backMenuButton.adjustsImageWhenHighlighted = false
+        
+        profileImage.image = person.image
+        nameTextField.text = person.name
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
@@ -70,60 +104,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            person.image = pickedImage
-            profileImage.image = pickedImage
-        }
-        dismiss(animated: true, completion: nil)
-    }
-    
-    
-   
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if let profileImageData = UserDefaults.standard.object(forKey: "profileImage"){
-            person.image = UIImage(data: profileImageData as! Data)
-        }
-        else{
-            person.image = UIImage(named: "tim-cook.jpg")
-        }
-        
-        if let profileName = UserDefaults.standard.string(forKey: "profileName"){
-            person.name = profileName
-        }
-        
-        if let profileCategories = UserDefaults.standard.object(forKey: "favoriteCategories"){
-            person.favoriteCategories = profileCategories as? [Bool]
-        }
-        else{
-            person.favoriteCategories = []
-            for _ in 0...categories.count {
-                person.favoriteCategories?.append(false)
-            }
-        }
-        
-        activityIndicatorView.color = UIColor.black
-        self.view.addSubview(activityIndicatorView)
-        self.view.bringSubviewToFront(activityIndicatorView)
-        activityIndicatorView.frame = self.view.frame
-        activityIndicatorView.center = self.view.center
-        backMenuButton.adjustsImageWhenHighlighted = false
-        
-        profileImage.image = person.image
-        nameTextField.text = person.name
-    }
-    
-    
-    
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
         categoriesButton.layer.cornerRadius = 7
         categoriesButton.layer.borderWidth = 1.5
@@ -140,17 +121,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         buttonNSOperation.layer.borderColor = UIColor.systemGray.cgColor
         buttonNSOperation.clipsToBounds = true
     
-        
         viewCategories.isHidden = true
-        
         viewCategories.backgroundColor = UIColor.clear
         blurredEffectView.frame = viewCategories.bounds
         viewCategories.addSubview(blurredEffectView)
-        
         viewCategories.bringSubviewToFront(tableView)
         viewCategories.bringSubviewToFront(categoriesLabel)
-        
         viewCategories.bringSubviewToFront(backToProfile)
+        
         backToProfile.backgroundColor = UIColor.clear
         categoriesLabel.backgroundColor = UIColor.clear
         
@@ -164,16 +142,31 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         profileImage.layer.cornerRadius = 20
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        person.name = nameTextField.text
+    }
+
+    @IBAction func touchGCDButton(_ sender: Any) {
+        saveWithGCD()
+    }
     
+    @IBAction func touchNSOperationButton(_ sender: Any) {
+       saveWithNSO()
+    }
+    @IBAction func touchBackToMenuButton(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+}
+
+//MARK: - Categories TableView
+extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! TableViewCellCategories
         if cell.checkMarkImage.isHidden{
             cell.checkMarkImage.isHidden = false
-//            cell.categoriesLabel.textColor = UIColor.black
             person.favoriteCategories![indexPath.row] = true
         } else {
             cell.checkMarkImage.isHidden = true
-//            cell.categoriesLabel.textColor = UIColor.darkGray
             person.favoriteCategories![indexPath.row] = false
         }
         tableView.deselectRow(at: indexPath, animated: false)
@@ -198,40 +191,53 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         cell.backgroundColor = UIColor.clear
         cell.selectionStyle = .none
-        
         return cell
     }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        person.name = nameTextField.text
-        
-    }
+}
 
-    @IBAction func touchGCDButton(_ sender: Any) {
+//MARK: - Save user data
+extension ProfileViewController : GUUserDataManager{
+    func saveWithGCD(){
         activityIndicatorView.startAnimating()
         let globalQueue = DispatchQueue.global(qos: .default)
         let profileImageData = person.image?.jpegData(compressionQuality: 0.8)
-        globalQueue.async {
-            UserDefaults.standard.set(profileImageData, forKey: "profileImage")
+        globalQueue.async { [weak self] in
+            guard let self = self else { return }
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(profileImageData, forKey: "profileImage")
             UserDefaults.standard.set(self.person.name, forKey: "profileName")
             UserDefaults.standard.set(self.person.favoriteCategories, forKey: "favoriteCategories")
+            userDefaults.synchronize()
         }
         activityIndicatorView.stopAnimating()
     }
     
-    @IBAction func touchNSOperationButton(_ sender: Any) {
+    func saveWithNSO(){
         activityIndicatorView.startAnimating()
-        let operationQueue = OperationQueue()
-        operationQueue.maxConcurrentOperationCount = 3
-        let profileImageData = person.image?.jpegData(compressionQuality: 0.8)
-        operationQueue.addOperation {
-            UserDefaults.standard.set(profileImageData, forKey: "profileImage")
-            UserDefaults.standard.set(self.person.name, forKey: "profileName")
-            UserDefaults.standard.set(self.person.favoriteCategories, forKey: "favoriteCategories")
-        }
-        activityIndicatorView.stopAnimating()
+               let operationQueue = OperationQueue()
+               operationQueue.maxConcurrentOperationCount = 3
+               let profileImageData = person.image?.jpegData(compressionQuality: 0.8)
+               operationQueue.addOperation {
+                   UserDefaults.standard.set(profileImageData, forKey: "profileImage")
+                   UserDefaults.standard.set(self.person.name, forKey: "profileName")
+                   UserDefaults.standard.set(self.person.favoriteCategories, forKey: "favoriteCategories")
+               }
+               activityIndicatorView.stopAnimating()
     }
-    @IBAction func touchBackToMenuButton(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+}
+
+//MARK: - Image Picker
+
+extension ProfileViewController:UIImagePickerControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            person.image = pickedImage
+            profileImage.image = pickedImage
+        }
+        dismiss(animated: true, completion: nil)
     }
 }

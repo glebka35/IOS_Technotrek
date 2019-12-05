@@ -22,6 +22,7 @@ struct ArticleDetail: Decodable {
     var content: String?
     var source: Source?
     var image: Data?
+    var description: String?
 }
 
 struct Source: Decodable {

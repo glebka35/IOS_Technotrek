@@ -2,7 +2,7 @@
 //  Articles+CoreDataProperties.swift
 //  myFirstProgram
 //
-//  Created by Глеб Уваркин on 10/11/2019.
+//  Created by Глеб Уваркин on 05/12/2019.
 //  Copyright © 2019 Gleb Uvarkin. All rights reserved.
 //
 //
@@ -22,6 +22,7 @@ extension Articles {
     @NSManaged public var date: String?
     @NSManaged public var image: Data?
     @NSManaged public var title: String?
+    @NSManaged public var descr: String?
     @NSManaged public var category: Categories?
 
 }
