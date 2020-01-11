@@ -213,7 +213,7 @@ Vestibulum convallis ullamcorper erat, id placerat tellus pulvinar eleifend. Don
 
 Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus, mattis in porta ut, luctus a urna. Sed a vulputate nisl, non hendrerit lacus. Phasellus scelerisque sit amet risus eget lobortis. Cras ut semper libero. Phasellus pulvinar mauris id faucibus pellentesque. Aliquam erat volutpat. Fusce sit amet erat ligula. Morbi purus neque, varius vitae arcu quis, hendrerit suscipit lacus. Integer malesuada pulvinar dui, sed luctus lorem porttitor ut. Aliquam dictum mollis justo, nec vestibulum ligula euismod nec.</string>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O1p-14-ofe">
@@ -414,7 +414,7 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                                             <outlet property="delegate" destination="d4L-KC-uQl" id="J1L-uJ-HTe"/>
                                         </connections>
                                     </tableView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gh-GS-4aK">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Категории" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gh-GS-4aK">
                                         <rect key="frame" x="0.0" y="38" width="414" height="47"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
