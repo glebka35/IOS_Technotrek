@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F70257F523C9E91F00E018A5 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70257F423C9E91F00E018A5 /* LaunchViewController.swift */; };
 		F70D3FA223780CCF00860611 /* Articles+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70D3FA023780CCF00860611 /* Articles+CoreDataClass.swift */; };
 		F70D3FA323780CCF00860611 /* Articles+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70D3FA123780CCF00860611 /* Articles+CoreDataProperties.swift */; };
 		F70D3FA523780F0500860611 /* GUCoreDataManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70D3FA423780F0500860611 /* GUCoreDataManagerImpl.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F70257F423C9E91F00E018A5 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		F70D3FA023780CCF00860611 /* Articles+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Articles+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F70D3FA123780CCF00860611 /* Articles+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Articles+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F70D3FA423780F0500860611 /* GUCoreDataManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUCoreDataManagerImpl.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				F7FA2D6A234135700011135C /* ViewController.swift */,
 				F7B3533D2356524D00206DF1 /* ArticleViewController.swift */,
 				F78FB7A2235F677B00360092 /* ProfileViewController.swift */,
+				F70257F423C9E91F00E018A5 /* LaunchViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				F784D8CE23986E1D00D590B4 /* GUUserDataManager.swift in Sources */,
 				F78FB7A3235F677B00360092 /* ProfileViewController.swift in Sources */,
 				F746EA96239435EE007A5F4A /* LastCharDeleteManager.mm in Sources */,
+				F70257F523C9E91F00E018A5 /* LaunchViewController.swift in Sources */,
 				F70D3FA9237825CF00860611 /* Categories+CoreDataProperties.swift in Sources */,
 				F78FB7A5235F7D5E00360092 /* TableViewCellCategories.swift in Sources */,
 				F784D8C92398660500D590B4 /* GUArticleDownloader.swift in Sources */,

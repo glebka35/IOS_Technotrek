@@ -61,16 +61,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7XI-HV-EeU">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtt-sZ-4Kr" customClass="ButtonCategories" customModule="News__" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtt-sZ-4Kr" customClass="ButtonCategories" customModule="News__" customModuleProvider="target">
                                         <rect key="frame" x="67" y="34" width="237" height="35"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="dRt-Jf-jUH"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <state key="normal" title="Startups" image="lines2">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
                                         <connections>
                                             <action selector="touchMenuButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BbX-Fx-ash"/>
@@ -511,12 +511,28 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="5Ub-jP-Yb3"/>
+                        <segue destination="QC6-pq-ubs" kind="relationship" relationship="rootViewController" id="w6h-Uu-3Gi"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OZE-2p-uUk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="416" y="129"/>
+            <point key="canvasLocation" x="-494" y="130"/>
+        </scene>
+        <!--Launch View Controller-->
+        <scene sceneID="0TG-on-ouJ">
+            <objects>
+                <viewController storyboardIdentifier="LaunchController" id="QC6-pq-ubs" customClass="LaunchViewController" customModule="News__" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eAw-8d-IdN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="fWB-pP-UZj"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lli-xe-aky"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PU7-Cy-BHV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="317" y="129"/>
         </scene>
     </scenes>
     <resources>

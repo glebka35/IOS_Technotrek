@@ -80,7 +80,7 @@ class ViewController: UIViewController{
         UiViewBar.backgroundColor = UIColor.clear
         blurredEffectView.frame = UiViewBar.bounds
         UiViewBar.addSubview(blurredEffectView)
-        UiViewBar.bringSubviewToFront(menuButton)
+        
         
         myTableView.contentInset = UIEdgeInsets(top: 25, left: 0, bottom: 0, right: 0)
         
@@ -100,6 +100,7 @@ class ViewController: UIViewController{
         menuButton.backgroundColor = UIColor.clear
 //        myTableView.addSubview(instanceThemeManager!)
 //        myTableView.bringSubviewToFront(instanceThemeManager!)
+        UiViewBar.bringSubviewToFront(menuButton)
     }
     
     @IBAction func touchProfileButton(_ sender: Any) {
@@ -114,17 +115,33 @@ class ViewController: UIViewController{
 extension ViewController : UIPickerViewDelegate, UIPickerViewDataSource {
     @IBAction func touchMenuButton(_ sender: Any) {
         if(viemForPicker.isHidden){
-            viemForPicker.isHidden = false
             viewForGesture.isHidden = false
+            viemForPicker.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, pickerView.bounds.height, 0)
+            viemForPicker.isHidden = false
+            UIView.animate(withDuration: 0.3) {
+                self.viemForPicker.layer.transform = CATransform3DIdentity
+            }
         }
         else{
-            viemForPicker.isHidden = true
+            let transform = CATransform3DTranslate(CATransform3DIdentity, 0, pickerView.bounds.height, 0)
+            UIView.animate(withDuration: 0.3, animations: {
+                self.viemForPicker.layer.transform = transform
+            }) {(finished) in
+                self.viemForPicker.isHidden = true
+                self.viemForPicker.layer.transform = CATransform3DIdentity
+            }
+            
+           
             viewForGesture.isHidden = true
             changeCategory()
         }
     }
     
     @IBAction func closePickerView(_ sender: UITapGestureRecognizer) {
+        let transform = CATransform3DTranslate(CATransform3DIdentity, 0, pickerView.bounds.height, 0)
+        UIView.animate(withDuration: 0.3) {
+            self.viemForPicker.layer.transform = transform
+        }
         viemForPicker.isHidden = true
         viewForGesture.isHidden = true
         changeCategory()
@@ -213,7 +230,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         for indexPathVisible in indexPathForVisibleRows{
             if(!isNewsAppeared[indexPath.row] && indexPath == indexPathVisible){
                 isNewsAppeared[indexPath.row] = true
-                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, -500, 10, 0)
+                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, -mainTable.bounds.width, 0, 0)
                 cell.layer.transform = rotationTransform
                 UIView.animate(withDuration: 0.5) {
                     cell.layer.transform = CATransform3DIdentity

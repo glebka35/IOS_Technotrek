@@ -16,19 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="SRh-8b-xyV">
-                                <rect key="frame" x="0.0" y="284" width="414" height="328"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guyWithPaper" translatesAutoresizingMaskIntoConstraints="NO" id="SRh-8b-xyV">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.67722511291503906" green="0.84521514177322388" blue="0.95680433511734009" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="SRh-8b-xyV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="240" id="9pR-Or-VVX"/>
-                            <constraint firstItem="SRh-8b-xyV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LoY-4P-vbe"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SRh-8b-xyV" secondAttribute="trailing" id="UWs-cz-2TS"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SRh-8b-xyV" secondAttribute="bottom" constant="250" id="xdd-dr-C1A"/>
+                            <constraint firstItem="SRh-8b-xyV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="c9Y-66-PDQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SRh-8b-xyV" secondAttribute="bottom" id="fsU-ml-ZL0"/>
+                            <constraint firstItem="SRh-8b-xyV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="g1l-Ro-cDa"/>
+                            <constraint firstItem="SRh-8b-xyV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lnd-ew-LOT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -39,6 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon" width="2880" height="1800"/>
+        <image name="guyWithPaper" width="1024" height="982"/>
     </resources>
 </document>

@@ -73,11 +73,23 @@ class ProfileViewController: UIViewController, UITextFieldDelegate,UINavigationC
     }
     
     @IBAction func touchCategoriesButton(_ sender: Any) {
+        let viewTransform = CATransform3DTranslate(CATransform3DIdentity, 0, viewCategories.bounds.height, 0)
+        viewCategories.layer.transform = viewTransform
         viewCategories.isHidden = false
+        UIView.animate(withDuration: 0.3) {
+            self.viewCategories.layer.transform = CATransform3DIdentity
+        }
+        
     }
     
     @IBAction func touchBackButton(_ sender: Any) {
-        viewCategories.isHidden = true
+        let transform = CATransform3DTranslate(CATransform3DIdentity, 0, viewCategories.bounds.height, 0)
+        UIView.animate(withDuration: 0.3, animations: {
+            self.viewCategories.layer.transform = transform
+        }) {(finished) in
+            self.viewCategories.isHidden = true
+            self.viewCategories.layer.transform = CATransform3DIdentity
+        }
     }
     
     @IBAction func pressPhotoButton(_ sender: Any) {
