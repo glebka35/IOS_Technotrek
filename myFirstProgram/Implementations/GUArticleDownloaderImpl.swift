@@ -25,7 +25,7 @@ class GUArticleDownloaderImpl : GUArticleDownloader {
             URLQueryItem(name: "from", value: currentDate),
             URLQueryItem(name: "sortBy", value: "publishedAt"),
             URLQueryItem(name: "apiKey", value: API_KEY),
-            URLQueryItem(name: "language", value: "en"),
+            URLQueryItem(name: "language", value: "ru"),
             URLQueryItem(name: "page", value: String(page))
         ]
         guard let articlesURL = urlComponents.url else

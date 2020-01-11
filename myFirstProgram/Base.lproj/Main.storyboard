@@ -277,13 +277,13 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                                     <constraint firstAttribute="height" constant="300" id="hMc-Zs-27Z"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8b-nQ-tw0">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Имя" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8b-nQ-tw0">
                                 <rect key="frame" x="20" y="410" width="374" height="23"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pVK-fK-uFk">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Введите ваше имя" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pVK-fK-uFk">
                                 <rect key="frame" x="20" y="441" width="374" height="34"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -291,7 +291,7 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                                     <outlet property="delegate" destination="d4L-KC-uQl" id="Hhs-Sf-lu9"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite Categories:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPN-7b-auR">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Избранные категории:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPN-7b-auR">
                                 <rect key="frame" x="20" y="500" width="374" height="23"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                                 <nil key="textColor"/>
@@ -300,7 +300,7 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EmM-Ib-wq8">
                                 <rect key="frame" x="20" y="543" width="374" height="33"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <state key="normal" title="Select Categories">
+                                <state key="normal" title="Выбрать категорию">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
@@ -332,14 +332,30 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                                     <action selector="touchGCDButton:" destination="d4L-KC-uQl" eventType="touchUpInside" id="dgx-ma-Pyf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3e3-9R-6pI">
-                                <rect key="frame" x="274" y="757" width="120" height="33"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PnZ-G2-m7T">
+                                <rect key="frame" x="20" y="44" width="30" height="34"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="1d5-Je-fUR"/>
-                                    <constraint firstAttribute="height" constant="33" id="QbK-hV-eRD"/>
+                                    <constraint firstAttribute="height" constant="34" id="H3f-xM-t8E"/>
+                                    <constraint firstAttribute="width" constant="30" id="zRk-sE-T7O"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" title="Button" image="back">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchBackButton:" destination="d4L-KC-uQl" eventType="touchUpInside" id="g0T-Cs-njJ"/>
+                                    <action selector="touchBackToMenuButton:" destination="d4L-KC-uQl" eventType="touchUpInside" id="slR-1o-53m"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3e3-9R-6pI">
+                                <rect key="frame" x="284" y="45" width="105" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="JCr-cR-w7c"/>
+                                    <constraint firstAttribute="width" constant="105" id="lhM-LA-wcY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <state key="normal" title="NSOperation">
+                                <state key="normal" title="Сохранить">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
@@ -433,22 +449,6 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                                     <constraint firstAttribute="trailing" secondItem="6gh-GS-4aK" secondAttribute="trailing" id="o91-a3-NxX"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PnZ-G2-m7T">
-                                <rect key="frame" x="20" y="44" width="30" height="34"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="H3f-xM-t8E"/>
-                                    <constraint firstAttribute="width" constant="30" id="zRk-sE-T7O"/>
-                                </constraints>
-                                <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <state key="normal" title="Button" image="back">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="touchBackButton:" destination="d4L-KC-uQl" eventType="touchUpInside" id="g0T-Cs-njJ"/>
-                                    <action selector="touchBackToMenuButton:" destination="d4L-KC-uQl" eventType="touchUpInside" id="slR-1o-53m"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -461,7 +461,6 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                             <constraint firstItem="5JF-YT-tpc" firstAttribute="leading" secondItem="J1P-UH-22v" secondAttribute="leading" constant="20" id="7gr-X8-SmB"/>
                             <constraint firstItem="EmM-Ib-wq8" firstAttribute="leading" secondItem="J1P-UH-22v" secondAttribute="leading" constant="20" id="85G-wP-awk"/>
                             <constraint firstItem="J1P-UH-22v" firstAttribute="trailing" secondItem="EmM-Ib-wq8" secondAttribute="trailing" constant="20" id="89V-Xk-uOc"/>
-                            <constraint firstItem="J1P-UH-22v" firstAttribute="bottom" secondItem="3e3-9R-6pI" secondAttribute="bottom" constant="72" id="8TK-gi-uuW"/>
                             <constraint firstItem="JPN-7b-auR" firstAttribute="leading" secondItem="J1P-UH-22v" secondAttribute="leading" constant="20" id="GPi-T9-IFZ"/>
                             <constraint firstItem="EmM-Ib-wq8" firstAttribute="top" secondItem="JPN-7b-auR" secondAttribute="bottom" constant="20" id="GhK-1p-9gE"/>
                             <constraint firstItem="JPN-7b-auR" firstAttribute="top" secondItem="pVK-fK-uFk" secondAttribute="bottom" constant="25" id="IpH-g8-Xyp"/>
@@ -471,17 +470,22 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                             <constraint firstItem="pVK-fK-uFk" firstAttribute="top" secondItem="o8b-nQ-tw0" secondAttribute="bottom" constant="8" id="WfE-yJ-WyM"/>
                             <constraint firstItem="J1P-UH-22v" firstAttribute="trailing" secondItem="o8b-nQ-tw0" secondAttribute="trailing" constant="20" id="YyN-In-65b"/>
                             <constraint firstItem="J1P-UH-22v" firstAttribute="trailing" secondItem="5JF-YT-tpc" secondAttribute="trailing" constant="20" id="cSQ-KQ-1Pf"/>
-                            <constraint firstItem="J1P-UH-22v" firstAttribute="trailing" secondItem="3e3-9R-6pI" secondAttribute="trailing" constant="20" id="gMI-rx-Arm"/>
-                            <constraint firstItem="3e3-9R-6pI" firstAttribute="leading" relation="lessThanOrEqual" secondItem="1WF-fj-sGf" secondAttribute="trailing" constant="134" id="j9F-Bj-K71"/>
                             <constraint firstItem="pVK-fK-uFk" firstAttribute="leading" secondItem="J1P-UH-22v" secondAttribute="leading" constant="20" id="jMf-Ae-iyO"/>
+                            <constraint firstItem="J1P-UH-22v" firstAttribute="trailing" secondItem="3e3-9R-6pI" secondAttribute="trailing" constant="25" id="k01-8S-agK"/>
                             <constraint firstItem="o8b-nQ-tw0" firstAttribute="top" secondItem="5JF-YT-tpc" secondAttribute="bottom" constant="5" id="kv4-PO-67L"/>
                             <constraint firstItem="PnZ-G2-m7T" firstAttribute="leading" secondItem="J1P-UH-22v" secondAttribute="leading" constant="20" id="lxA-sA-Zr9"/>
+                            <constraint firstItem="3e3-9R-6pI" firstAttribute="top" secondItem="J1P-UH-22v" secondAttribute="top" constant="1" id="okZ-l0-UnR"/>
                             <constraint firstItem="KtY-LM-Ch2" firstAttribute="trailing" secondItem="5JF-YT-tpc" secondAttribute="trailing" constant="-5" id="rkH-I5-tEf"/>
                             <constraint firstItem="J1P-UH-22v" firstAttribute="bottom" secondItem="1WF-fj-sGf" secondAttribute="bottom" constant="72" id="tJr-Rn-eaQ"/>
                             <constraint firstItem="1WF-fj-sGf" firstAttribute="leading" secondItem="J1P-UH-22v" secondAttribute="leading" constant="20" id="wYn-4P-h1Y"/>
                             <constraint firstItem="5JF-YT-tpc" firstAttribute="top" secondItem="J1P-UH-22v" secondAttribute="top" constant="61" id="xT6-b2-CiL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="J1P-UH-22v"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="1WF-fj-sGf"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="backMenuButton" destination="PnZ-G2-m7T" id="b8D-T1-DUq"/>

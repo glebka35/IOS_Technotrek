@@ -19,7 +19,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate,UINavigationC
     var person = personInfo()
     let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     let blurredEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-    private let categories = ["Startups", "Technology", "Business", "Politics"]
+    private let categories = ["Стартапы", "Технологии", "Бизнес", "Политика", "Развлечения"]
     
     @IBOutlet weak var buttonNSOperation: UIButton!
     @IBOutlet weak var buttonGCD: UIButton!
@@ -96,21 +96,21 @@ class ProfileViewController: UIViewController, UITextFieldDelegate,UINavigationC
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         
-        let actionSheet = UIAlertController(title: "Photo source", message: "Choose a source", preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: "Источник фото", message: "Выберите источник", preferredStyle: .actionSheet)
         
-        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action: UIAlertAction) in
+        actionSheet.addAction(UIAlertAction(title: "Камера", style: .default, handler: { (action: UIAlertAction) in
             imagePicker.sourceType = .camera
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }))
         
-        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (action: UIAlertAction) in
+        actionSheet.addAction(UIAlertAction(title: "Галерея", style: .default, handler: { (action: UIAlertAction) in
             imagePicker.sourceType = .photoLibrary
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }))
         
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
     
         self.present(actionSheet, animated: true, completion: nil)
         

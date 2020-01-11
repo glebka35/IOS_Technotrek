@@ -9,15 +9,15 @@ import UIKit
 import CoreData
 
 class ViewController: UIViewController{
-    private let categories = ["Startups", "Technology", "Business", "Politics", "Favorites", "Cars"]
+    private let categories = ["Стартапы", "Технологии", "Бизнес", "Политика", "Избранное", "Развлечения"]
     let articleDownloader = GUArticleDownloaderImpl()
     let coreDataManager = GUCoreDataManagerImpl()
     let blurredEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     let blurredEffectViewPicker = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     let instanceThemeManager = ThemeManager.sharedInstance()
     
-    var currentCategory = "Startups"
-    var chosenCategory = "Startups"
+    var currentCategory = "Стартапы"
+    var chosenCategory = "Стартапы"
     var imagesToDownload = 0
     var countOfArticles = 0 {
         didSet{
