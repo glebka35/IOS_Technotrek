@@ -73,7 +73,7 @@ class ViewController: UIViewController{
 //        NotificationCenter.default.addObserver(self, selector: #selector(setToDark(notification:)), name: .dark, object: nil)
         super.viewDidLoad()
         isGetArticleFromCoreData = true
-        print(workWithCppClass(myString: currentCategory))
+//        print(workWithCppClass(myString: currentCategory))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -209,6 +209,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
             articleVC.text = listOfArticles[indexPath.row].description ?? ""
             articleVC.image = UIImage(data:listOfArticles[indexPath.row].image!)
             articleVC.currentCategory = self.currentCategory
+            articleVC.urlToArticle = listOfArticles[indexPath.row].url ?? ""
             articleVC.articletTitle = listOfArticles[indexPath.row].title ?? "No title"
             self.navigationController?.pushViewController(articleVC, animated: true)
         }
@@ -318,6 +319,7 @@ extension ViewController {
                 articleForContext.title = article.title
                 articleForContext.date = article.publishedAt
                 articleForContext.image = article.image
+                articleForContext.url = article.url
                 articleForContext.descr = article.description
                 articleForContext.category = categoryUnwraped
                 categoryUnwraped.addToArticle(articleForContext)
@@ -355,6 +357,7 @@ extension ViewController {
                 article.content = news.content
                 article.image = news.image
                 article.title = news.title
+                article.url = news.url
                 article.publishedAt = news.date
                 article.description = news.descr
                 gotArticles.append(article)

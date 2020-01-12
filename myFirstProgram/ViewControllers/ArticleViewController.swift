@@ -23,20 +23,21 @@ class ArticleViewController: UIViewController {
     @IBOutlet weak var imageVIew: UIImageView!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var returnButton: UIButton!
     
     var text = ""
     var articletTitle = ""
     var image:UIImage? = UIImage()
     var currentCategory = ""
-    
-    @IBOutlet weak var returnButton: UIButton!
-    
+    var urlToArticle = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         returnButton.adjustsImageWhenHighlighted = false;
         textView.text = text
         imageVIew.image = image
+            
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,7 +49,19 @@ class ArticleViewController: UIViewController {
         saveButton.layer.borderColor = UIColor.black.cgColor
         saveButton.layer.borderWidth = 1.5
         saveButton.clipsToBounds = true
+        
+        if(urlToArticle != ""){
+            shareButton.isHidden = false
+            shareButton.layer.cornerRadius = 7
+            shareButton.layer.borderWidth = 1.5
+            shareButton.layer.borderColor = UIColor.systemGray.cgColor
+            shareButton.clipsToBounds = true
+            self.view.bringSubviewToFront(shareButton)
+        } else {
+            shareButton.isHidden = true
+        }
         self.view.bringSubviewToFront(saveButton)
+        
     }
     
     @IBAction func returnButton(_ sender: Any) {
@@ -71,4 +84,9 @@ class ArticleViewController: UIViewController {
         activityIndicatorView.stopAnimating()
     }
     
+    @IBAction func pressShareButton(_ sender: Any){
+        guard let url = URL(string: urlToArticle) else {return}
+        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        self.present(activityVC, animated: true)
+    }
 }

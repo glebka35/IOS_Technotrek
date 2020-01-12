@@ -16,27 +16,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blueBackground" translatesAutoresizingMaskIntoConstraints="NO" id="N4p-ut-G7Y" userLabel="background">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guyWithPaper" translatesAutoresizingMaskIntoConstraints="NO" id="SRh-8b-xyV">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.67722511291503906" green="0.84521514177322388" blue="0.95680433511734009" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="SRh-8b-xyV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="c9Y-66-PDQ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SRh-8b-xyV" secondAttribute="bottom" id="fsU-ml-ZL0"/>
-                            <constraint firstItem="SRh-8b-xyV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="g1l-Ro-cDa"/>
-                            <constraint firstItem="SRh-8b-xyV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lnd-ew-LOT"/>
+                            <constraint firstItem="SRh-8b-xyV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0Yk-J3-zFt"/>
+                            <constraint firstItem="SRh-8b-xyV" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="50c-W9-KzC"/>
+                            <constraint firstItem="SRh-8b-xyV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="H0c-Ag-eU5"/>
+                            <constraint firstItem="SRh-8b-xyV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ze1-3a-v2t"/>
+                            <constraint firstItem="N4p-ut-G7Y" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="hp8-Tz-O6T"/>
+                            <constraint firstItem="N4p-ut-G7Y" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ixT-S2-mrk"/>
+                            <constraint firstItem="N4p-ut-G7Y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="qXm-PR-EW6"/>
+                            <constraint firstAttribute="bottom" secondItem="N4p-ut-G7Y" secondAttribute="bottom" id="zZu-Bu-mH4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
     <resources>
+        <image name="blueBackground" width="1024" height="1024"/>
         <image name="guyWithPaper" width="1024" height="982"/>
     </resources>
 </document>

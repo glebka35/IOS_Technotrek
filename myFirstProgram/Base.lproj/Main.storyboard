@@ -189,8 +189,8 @@
                                 <rect key="frame" x="20" y="44" width="30" height="34"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="Ed6-Z1-um7"/>
-                                    <constraint firstAttribute="width" constant="30" id="Xtk-qp-jrJ"/>
+                                    <constraint firstAttribute="width" constant="30" id="Bfi-Mr-p5v"/>
+                                    <constraint firstAttribute="height" constant="34" id="wTM-9g-TEz"/>
                                 </constraints>
                                 <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <state key="normal" image="back">
@@ -200,31 +200,11 @@
                                     <action selector="returnButton:" destination="9xY-vC-5tC" eventType="touchUpInside" id="eVA-vO-g5A"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dQn-Ep-tey">
-                                <rect key="frame" x="20" y="466" width="374" height="377"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non ex finibus, laoreet ex aliquet, dictum tortor. Suspendisse a blandit elit. Curabitur sodales non tortor nec facilisis. Integer imperdiet iaculis magna eu malesuada. Duis ullamcorper nunc placerat porttitor ultrices. Nulla varius et massa a tempor. Vivamus eu varius arcu. Nunc orci nulla, ultrices sit amet mi quis, feugiat malesuada dolor.
-
-Phasellus luctus nulla in felis tempor mollis. Ut ut risus commodo, blandit lorem in, aliquet massa. Sed ultrices ligula id condimentum porttitor. Aliquam molestie purus eu pretium euismod. Nulla ullamcorper metus ac enim ornare, id tincidunt ligula pellentesque. Donec accumsan lorem vel enim ultrices, in tristique nulla convallis. Nunc posuere commodo tellus at rutrum. Curabitur a turpis convallis, suscipit justo a, pellentesque felis. Quisque nibh orci, pulvinar sit amet nulla eu, sodales sollicitudin turpis.
-
-Donec vestibulum porta egestas. Aliquam erat volutpat. Nunc nulla enim, mattis vel sodales quis, dictum in sem. Morbi ultrices ligula nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend dolor lectus, et blandit justo congue ac. Morbi justo eros, convallis vitae orci at, sodales ultricies ligula. Vestibulum bibendum turpis nunc, eu elementum libero viverra quis. Maecenas non sagittis odio, a ultricies sapien. Quisque fringilla blandit arcu, eu luctus mi euismod id. Fusce nulla urna, aliquam ut lorem quis, efficitur molestie purus. Pellentesque odio tellus, ullamcorper eget nibh sed, vulputate accumsan orci. Etiam dignissim massa ut ex lobortis, vitae dignissim ante consectetur. Praesent et consectetur libero.
-
-Vestibulum convallis ullamcorper erat, id placerat tellus pulvinar eleifend. Donec venenatis aliquet metus, et condimentum nisl dictum eget. Curabitur rutrum rhoncus nunc, ut blandit quam. Mauris tristique ac justo ut ullamcorper. Suspendisse lacus quam, commodo at orci aliquet, pulvinar aliquam ipsum. Donec tempus semper pulvinar. Cras lobortis lacinia nisi id sodales. Duis ornare maximus lobortis. Donec a nulla a purus luctus rhoncus. Curabitur non eros ipsum. Pellentesque a mi eu velit mollis tincidunt non sit amet ipsum. Proin eu auctor justo. Aliquam pretium sed libero et tempor. Sed sed sagittis turpis, quis eleifend lorem. Suspendisse venenatis erat eget lorem tincidunt, sit amet fringilla orci placerat. Integer pellentesque elit ut urna mattis, vel consequat leo eleifend.
-
-Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus, mattis in porta ut, luctus a urna. Sed a vulputate nisl, non hendrerit lacus. Phasellus scelerisque sit amet risus eget lobortis. Cras ut semper libero. Phasellus pulvinar mauris id faucibus pellentesque. Aliquam erat volutpat. Fusce sit amet erat ligula. Morbi purus neque, varius vitae arcu quis, hendrerit suscipit lacus. Integer malesuada pulvinar dui, sed luctus lorem porttitor ut. Aliquam dictum mollis justo, nec vestibulum ligula euismod nec.</string>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O1p-14-ofe">
-                                <rect key="frame" x="20" y="107" width="374" height="300"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="2CX-hu-zhh"/>
-                                    <constraint firstAttribute="height" constant="300" id="Hei-io-hdm"/>
-                                </constraints>
-                            </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="10" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbK-C8-6dn">
                                 <rect key="frame" x="200" y="44" width="194" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="xpH-pG-gqO"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
                                 <state key="normal" title="Save">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -233,29 +213,99 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                                     <action selector="pressSaveButton:" destination="9xY-vC-5tC" eventType="touchUpInside" id="li6-0o-1YA"/>
                                 </connections>
                             </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ecg-zl-4Ye">
+                                <rect key="frame" x="0.0" y="98" width="414" height="764"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BRF-Fz-ZYG" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="-10" width="414" height="530"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O1p-14-ofe" userLabel="ImageView">
+                                                <rect key="frame" x="20" y="0.0" width="374" height="300"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="300" id="wPl-zN-zJh"/>
+                                                </constraints>
+                                            </imageView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dQn-Ep-tey">
+                                                <rect key="frame" x="8" y="320" width="398" height="210"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non ex finibus, laoreet ex aliquet, dictum tortor. Suspendisse a blandit elit. Curabitur sodales non tortor nec facilisis. Integer imperdiet iaculis magna eu malesuada. Duis ullamcorper nunc placerat porttitor ultrices. Nulla varius et massa a tempor. Vivamus eu varius arcu. Nunc orci nulla, ultrices sit amet mi quis, feugiat malesuada dolor.
+
+Phasellus luctus nulla in felis tempor mollis. Ut ut risus commodo, blandit lorem in, aliquet massa. Sed ultrices ligula id condimentum porttitor. Aliquam molestie purus eu pretium euismod. Nulla ullamcorper metus ac enim ornare, id tincidunt ligula pellentesque. Donec accumsan lorem vel enim ultrices, in tristique nulla convallis. Nunc posuere commodo tellus at rutrum. Curabitur a turpis convallis, suscipit justo a, pellentesque felis. Quisque nibh orci, pulvinar sit amet nulla eu, sodales sollicitudin turpis.
+
+Donec vestibulum porta egestas. Aliquam erat volutpat. Nunc nulla enim, mattis vel sodales quis, dictum in sem. Morbi ultrices ligula nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend dolor lectus, et blandit justo congue ac. Morbi justo eros, convallis vitae orci at, sodales ultricies ligula. Vestibulum bibendum turpis nunc, eu elementum libero viverra quis. Maecenas non sagittis odio, a ultricies sapien. Quisque fringilla blandit arcu, eu luctus mi euismod id. Fusce nulla urna, aliquam ut lorem quis, efficitur molestie purus. Pellentesque odio tellus, ullamcorper eget nibh sed, vulputate accumsan orci. Etiam dignissim massa ut ex lobortis, vitae dignissim ante consectetur. Praesent et consectetur libero.
+
+Vestibulum convallis ullamcorper erat, id placerat tellus pulvinar eleifend. Donec venenatis aliquet metus, et condimentum nisl dictum eget. Curabitur rutrum rhoncus nunc, ut blandit quam. Mauris tristique ac justo ut ullamcorper. Suspendisse lacus quam, commodo at orci aliquet, pulvinar aliquam ipsum. Donec tempus semper pulvinar. Cras lobortis lacinia nisi id sodales. Duis ornare maximus lobortis. Donec a nulla a purus luctus rhoncus. Curabitur non eros ipsum. Pellentesque a mi eu velit mollis tincidunt non sit amet ipsum. Proin eu auctor justo. Aliquam pretium sed libero et tempor. Sed sed sagittis turpis, quis eleifend lorem. Suspendisse venenatis erat eget lorem tincidunt, sit amet fringilla orci placerat. Integer pellentesque elit ut urna mattis, vel consequat leo eleifend.
+
+Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus, mattis in porta ut, luctus a urna. Sed a vulputate nisl, non hendrerit lacus. Phasellus scelerisque sit amet risus eget lobortis. Cras ut semper libero. Phasellus pulvinar mauris id faucibus pellentesque. Aliquam erat volutpat. Fusce sit amet erat ligula. Morbi purus neque, varius vitae arcu quis, hendrerit suscipit lacus. Integer malesuada pulvinar dui, sed luctus lorem porttitor ut. Aliquam dictum mollis justo, nec vestibulum ligula euismod nec.</string>
+                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="dQn-Ep-tey" secondAttribute="trailing" constant="8" id="3Az-eo-lnn"/>
+                                            <constraint firstItem="O1p-14-ofe" firstAttribute="leading" secondItem="BRF-Fz-ZYG" secondAttribute="leading" constant="20" id="GRQ-Po-qJQ"/>
+                                            <constraint firstItem="O1p-14-ofe" firstAttribute="top" secondItem="BRF-Fz-ZYG" secondAttribute="top" id="PBg-2h-vAO"/>
+                                            <constraint firstItem="dQn-Ep-tey" firstAttribute="top" secondItem="O1p-14-ofe" secondAttribute="bottom" constant="20" id="V6m-qi-jAi"/>
+                                            <constraint firstItem="dQn-Ep-tey" firstAttribute="leading" secondItem="BRF-Fz-ZYG" secondAttribute="leading" constant="8" id="a3e-1P-bLa"/>
+                                            <constraint firstAttribute="trailing" secondItem="O1p-14-ofe" secondAttribute="trailing" constant="20" id="lwr-9a-Pqx"/>
+                                            <constraint firstAttribute="bottom" secondItem="dQn-Ep-tey" secondAttribute="bottom" id="obI-Je-8N4"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="BRF-Fz-ZYG" firstAttribute="width" secondItem="Ecg-zl-4Ye" secondAttribute="width" id="05p-1a-RNt"/>
+                                    <constraint firstAttribute="bottom" secondItem="BRF-Fz-ZYG" secondAttribute="bottom" id="0p6-ck-Ncq"/>
+                                    <constraint firstItem="BRF-Fz-ZYG" firstAttribute="top" secondItem="Ecg-zl-4Ye" secondAttribute="top" constant="-10" id="FSq-bc-lG2"/>
+                                    <constraint firstItem="BRF-Fz-ZYG" firstAttribute="leading" secondItem="Ecg-zl-4Ye" secondAttribute="leading" id="ePm-Ei-WoE"/>
+                                    <constraint firstAttribute="trailing" secondItem="BRF-Fz-ZYG" secondAttribute="trailing" id="fqa-qB-M5N"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="LYd-qH-iQJ"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="l3U-Hy-ZCE"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSF-9o-8pg" userLabel="ShareButton">
+                                <rect key="frame" x="284" y="44" width="110" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="110" id="CoD-dc-GVS"/>
+                                    <constraint firstAttribute="height" constant="34" id="UCf-T6-Lp7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                <state key="normal" title="Поделиться">
+                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressShareButton:" destination="9xY-vC-5tC" eventType="touchUpInside" id="7cH-1e-beW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="tZM-gk-QLe" firstAttribute="trailing" secondItem="O1p-14-ofe" secondAttribute="trailing" constant="20" id="G0A-xu-v0M"/>
+                            <constraint firstItem="0pO-V3-FdP" firstAttribute="top" secondItem="tZM-gk-QLe" secondAttribute="top" id="6L1-hZ-VWT"/>
+                            <constraint firstItem="tZM-gk-QLe" firstAttribute="trailing" secondItem="Ecg-zl-4Ye" secondAttribute="trailing" id="DRf-gr-49k"/>
+                            <constraint firstItem="Ecg-zl-4Ye" firstAttribute="leading" secondItem="tZM-gk-QLe" secondAttribute="leading" id="EpC-rh-hF3"/>
+                            <constraint firstItem="tZM-gk-QLe" firstAttribute="bottom" secondItem="Ecg-zl-4Ye" secondAttribute="bottom" id="G97-vZ-kUq"/>
+                            <constraint firstItem="Ecg-zl-4Ye" firstAttribute="top" secondItem="tZM-gk-QLe" secondAttribute="top" constant="54" id="I6J-gd-db1"/>
+                            <constraint firstItem="wSF-9o-8pg" firstAttribute="top" secondItem="tZM-gk-QLe" secondAttribute="top" id="I6l-65-Tij"/>
                             <constraint firstItem="YbK-C8-6dn" firstAttribute="top" secondItem="tZM-gk-QLe" secondAttribute="top" id="P91-cT-Ehw"/>
                             <constraint firstItem="YbK-C8-6dn" firstAttribute="leading" relation="lessThanOrEqual" secondItem="tZM-gk-QLe" secondAttribute="leading" constant="200" id="Q7x-vS-K12"/>
-                            <constraint firstItem="O1p-14-ofe" firstAttribute="leading" secondItem="tZM-gk-QLe" secondAttribute="leading" constant="20" id="UY5-Um-gzY"/>
-                            <constraint firstItem="dQn-Ep-tey" firstAttribute="top" secondItem="O1p-14-ofe" secondAttribute="bottom" constant="59" id="c6D-BI-Ucr"/>
-                            <constraint firstItem="tZM-gk-QLe" firstAttribute="bottom" secondItem="dQn-Ep-tey" secondAttribute="bottom" constant="19" id="gie-D8-iOS"/>
-                            <constraint firstItem="tZM-gk-QLe" firstAttribute="trailing" secondItem="dQn-Ep-tey" secondAttribute="trailing" constant="20" id="iH8-9g-qBh"/>
                             <constraint firstItem="tZM-gk-QLe" firstAttribute="trailing" secondItem="YbK-C8-6dn" secondAttribute="trailing" constant="20" id="iLX-Fc-Zih"/>
-                            <constraint firstItem="O1p-14-ofe" firstAttribute="top" secondItem="YbK-C8-6dn" secondAttribute="bottom" constant="29" id="k0U-3N-TcU"/>
-                            <constraint firstItem="O1p-14-ofe" firstAttribute="top" secondItem="0pO-V3-FdP" secondAttribute="bottom" constant="29" id="kjp-TW-DSQ"/>
-                            <constraint firstItem="dQn-Ep-tey" firstAttribute="leading" secondItem="tZM-gk-QLe" secondAttribute="leading" constant="20" id="riU-8K-H9W"/>
-                            <constraint firstItem="0pO-V3-FdP" firstAttribute="leading" secondItem="tZM-gk-QLe" secondAttribute="leading" constant="20" id="stx-bV-8sb"/>
+                            <constraint firstItem="tZM-gk-QLe" firstAttribute="trailing" secondItem="wSF-9o-8pg" secondAttribute="trailing" constant="20" id="pwX-xr-3Uj"/>
+                            <constraint firstItem="0pO-V3-FdP" firstAttribute="leading" secondItem="tZM-gk-QLe" secondAttribute="leading" constant="20" id="qHG-GG-53f"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tZM-gk-QLe"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="YbK-C8-6dn"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="hmL-yz-hje"/>
                     <connections>
                         <outlet property="imageVIew" destination="O1p-14-ofe" id="EBh-C1-EO2"/>
                         <outlet property="returnButton" destination="0pO-V3-FdP" id="jvK-PD-eFj"/>
                         <outlet property="saveButton" destination="YbK-C8-6dn" id="PR8-bs-5Ad"/>
+                        <outlet property="shareButton" destination="wSF-9o-8pg" id="ddu-zU-N8w"/>
                         <outlet property="textView" destination="dQn-Ep-tey" id="dIZ-tI-vzC"/>
                     </connections>
                 </viewController>
