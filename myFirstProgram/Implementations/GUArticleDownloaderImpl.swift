@@ -10,7 +10,7 @@ import Foundation
 
 class GUArticleDownloaderImpl : GUArticleDownloader {
     let API_KEY = "3261fe0c899147bea616ee4669ef54bf"
-    
+    let API_KEY2 = "e5ad458bf2844b628f5e593e7edd1e96"
     func makeURL(category:String, page: Int) -> URL?{
         let date = Date()
         let format = DateFormatter()
@@ -24,7 +24,7 @@ class GUArticleDownloaderImpl : GUArticleDownloader {
             URLQueryItem(name: "q", value: category),
             URLQueryItem(name: "from", value: currentDate),
             URLQueryItem(name: "sortBy", value: "publishedAt"),
-            URLQueryItem(name: "apiKey", value: API_KEY),
+            URLQueryItem(name: "apiKey", value: API_KEY2),
             URLQueryItem(name: "language", value: "ru"),
             URLQueryItem(name: "page", value: String(page))
         ]

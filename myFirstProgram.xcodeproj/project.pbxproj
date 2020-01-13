@@ -25,6 +25,7 @@
 		F78FB7A3235F677B00360092 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78FB7A2235F677B00360092 /* ProfileViewController.swift */; };
 		F78FB7A5235F7D5E00360092 /* TableViewCellCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78FB7A4235F7D5E00360092 /* TableViewCellCategories.swift */; };
 		F7B3533E2356524D00206DF1 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B3533D2356524D00206DF1 /* ArticleViewController.swift */; };
+		F7C69B9023CC83C60029E9EC /* CheckInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C69B8F23CC83C60029E9EC /* CheckInternet.swift */; };
 		F7C951A32353AFE40067E78F /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C951A22353AFE40067E78F /* MainTableViewCell.swift */; };
 		F7FA2D67234135700011135C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA2D66234135700011135C /* AppDelegate.swift */; };
 		F7FA2D6B234135700011135C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA2D6A234135700011135C /* ViewController.swift */; };
@@ -67,6 +68,7 @@
 		F78FB7A2235F677B00360092 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F78FB7A4235F7D5E00360092 /* TableViewCellCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellCategories.swift; sourceTree = "<group>"; };
 		F7B3533D2356524D00206DF1 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
+		F7C69B8F23CC83C60029E9EC /* CheckInternet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInternet.swift; sourceTree = "<group>"; };
 		F7C951A22353AFE40067E78F /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		F7FA2D63234135700011135C /* News.|.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "News.|.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7FA2D66234135700011135C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				F784D8C223985B2600D590B4 /* Protocols */,
 				F784D8CA239866DD00D590B4 /* Implementations */,
 				F74379752364A68A00C64093 /* Article.swift */,
+				F7C69B8F23CC83C60029E9EC /* CheckInternet.swift */,
 				F7508155239110AC00791B7F /* ButtonCategories.swift */,
 				F7FA2D6C234135700011135C /* Main.storyboard */,
 				F7FA2D74234135710011135C /* LaunchScreen.storyboard */,
@@ -326,6 +329,7 @@
 				F70D3FA8237825CF00860611 /* Categories+CoreDataClass.swift in Sources */,
 				F7508156239110AC00791B7F /* ButtonCategories.swift in Sources */,
 				F7FA2D67234135700011135C /* AppDelegate.swift in Sources */,
+				F7C69B9023CC83C60029E9EC /* CheckInternet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

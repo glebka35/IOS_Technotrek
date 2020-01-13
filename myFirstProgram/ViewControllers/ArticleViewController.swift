@@ -25,19 +25,28 @@ class ArticleViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var returnButton: UIButton!
+    @IBOutlet weak var sourceNameLabel: UILabel!
+    @IBOutlet weak var urlLabel: UITextView!
     
     var text = ""
     var articletTitle = ""
     var image:UIImage? = UIImage()
     var currentCategory = ""
     var urlToArticle = ""
+    var sourceName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         returnButton.adjustsImageWhenHighlighted = false;
         textView.text = text
         imageVIew.image = image
-            
+        if sourceName != "" {
+            sourceNameLabel.text = sourceName
+        }
+        
+        if urlToArticle != "" {
+            urlLabel.text = urlToArticle
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

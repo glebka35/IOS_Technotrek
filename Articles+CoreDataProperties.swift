@@ -24,6 +24,7 @@ extension Articles {
     @NSManaged public var image: Data?
     @NSManaged public var title: String?
     @NSManaged public var url: String?
+    @NSManaged public var source: String?
     @NSManaged public var category: Categories?
 
 }

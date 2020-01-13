@@ -61,7 +61,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7XI-HV-EeU">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtt-sZ-4Kr" customClass="ButtonCategories" customModule="News__" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtt-sZ-4Kr" customClass="ButtonCategories" customModule="News__" customModuleProvider="target">
                                         <rect key="frame" x="67" y="34" width="237" height="35"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -70,7 +70,7 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <state key="normal" title="Startups" image="lines2">
-                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
                                         <connections>
                                             <action selector="touchMenuButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BbX-Fx-ash"/>
@@ -83,7 +83,7 @@
                                             <constraint firstAttribute="height" constant="25" id="0RI-QC-LbK"/>
                                             <constraint firstAttribute="width" constant="25" id="C8p-hV-Wdh"/>
                                         </constraints>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <state key="normal" image="blackProfileIcon">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -202,9 +202,7 @@
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="10" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbK-C8-6dn">
                                 <rect key="frame" x="200" y="44" width="194" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="xpH-pG-gqO"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
                                 <state key="normal" title="Save">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -217,7 +215,7 @@
                                 <rect key="frame" x="0.0" y="98" width="414" height="764"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BRF-Fz-ZYG" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="-10" width="414" height="530"/>
+                                        <rect key="frame" x="0.0" y="-10" width="414" height="759"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O1p-14-ofe" userLabel="ImageView">
                                                 <rect key="frame" x="20" y="0.0" width="374" height="300"/>
@@ -241,16 +239,70 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSF-9o-8pg" userLabel="ShareButton">
+                                                <rect key="frame" x="107" y="705" width="200" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="Mfq-y3-PBE"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                                                <state key="normal" title="Поделиться">
+                                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="pressShareButton:" destination="9xY-vC-5tC" eventType="touchUpInside" id="7cH-1e-beW"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Источник:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yxc-pb-913">
+                                                <rect key="frame" x="20" y="574" width="82" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="Hz7-dM-nil"/>
+                                                    <constraint firstAttribute="width" constant="82" id="dmA-cU-5OM"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="нет источника" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAt-CQ-bv1">
+                                                <rect key="frame" x="116" y="574" width="278" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="24V-30-WA3"/>
+                                                    <constraint firstAttribute="width" constant="278" id="w7H-iA-mLJ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Нет ссылки" translatesAutoresizingMaskIntoConstraints="NO" id="Dj0-Xb-8N6">
+                                                <rect key="frame" x="15" y="595" width="379" height="30"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="3Ea-En-f5A"/>
+                                                </constraints>
+                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="dQn-Ep-tey" secondAttribute="trailing" constant="8" id="3Az-eo-lnn"/>
+                                            <constraint firstItem="Yxc-pb-913" firstAttribute="top" secondItem="dQn-Ep-tey" secondAttribute="bottom" constant="44" id="6HR-lk-8Rg"/>
+                                            <constraint firstItem="MAt-CQ-bv1" firstAttribute="leading" secondItem="Yxc-pb-913" secondAttribute="trailing" constant="14" id="6jF-0f-tL9"/>
                                             <constraint firstItem="O1p-14-ofe" firstAttribute="leading" secondItem="BRF-Fz-ZYG" secondAttribute="leading" constant="20" id="GRQ-Po-qJQ"/>
+                                            <constraint firstItem="wSF-9o-8pg" firstAttribute="top" secondItem="Dj0-Xb-8N6" secondAttribute="bottom" constant="80" id="IoA-nY-7eb"/>
+                                            <constraint firstItem="Dj0-Xb-8N6" firstAttribute="leading" secondItem="BRF-Fz-ZYG" secondAttribute="leading" constant="15" id="LF5-Zn-mXe"/>
+                                            <constraint firstAttribute="trailing" secondItem="MAt-CQ-bv1" secondAttribute="trailing" constant="20" id="OAQ-bc-qjK"/>
                                             <constraint firstItem="O1p-14-ofe" firstAttribute="top" secondItem="BRF-Fz-ZYG" secondAttribute="top" id="PBg-2h-vAO"/>
-                                            <constraint firstItem="dQn-Ep-tey" firstAttribute="top" secondItem="O1p-14-ofe" secondAttribute="bottom" constant="20" id="V6m-qi-jAi"/>
-                                            <constraint firstItem="dQn-Ep-tey" firstAttribute="leading" secondItem="BRF-Fz-ZYG" secondAttribute="leading" constant="8" id="a3e-1P-bLa"/>
+                                            <constraint firstAttribute="trailing" secondItem="dQn-Ep-tey" secondAttribute="trailing" constant="8" id="Q0s-hZ-Eup"/>
+                                            <constraint firstItem="dQn-Ep-tey" firstAttribute="leading" secondItem="BRF-Fz-ZYG" secondAttribute="leading" constant="8" id="WRf-HT-Tmb"/>
+                                            <constraint firstAttribute="bottom" secondItem="wSF-9o-8pg" secondAttribute="bottom" constant="20" id="X79-yC-JUN"/>
+                                            <constraint firstItem="Dj0-Xb-8N6" firstAttribute="top" secondItem="Yxc-pb-913" secondAttribute="bottom" id="Zk9-tN-cK6"/>
+                                            <constraint firstItem="MAt-CQ-bv1" firstAttribute="top" secondItem="dQn-Ep-tey" secondAttribute="bottom" constant="44" id="Zn6-g2-pug"/>
                                             <constraint firstAttribute="trailing" secondItem="O1p-14-ofe" secondAttribute="trailing" constant="20" id="lwr-9a-Pqx"/>
-                                            <constraint firstAttribute="bottom" secondItem="dQn-Ep-tey" secondAttribute="bottom" id="obI-Je-8N4"/>
+                                            <constraint firstItem="dQn-Ep-tey" firstAttribute="top" secondItem="O1p-14-ofe" secondAttribute="bottom" constant="20" id="mkI-Td-ARb"/>
+                                            <constraint firstItem="wSF-9o-8pg" firstAttribute="centerX" secondItem="BRF-Fz-ZYG" secondAttribute="centerX" id="oYh-MM-BmB"/>
+                                            <constraint firstItem="Yxc-pb-913" firstAttribute="leading" secondItem="BRF-Fz-ZYG" secondAttribute="leading" constant="20" id="sJh-xB-QFS"/>
+                                            <constraint firstAttribute="trailing" secondItem="Dj0-Xb-8N6" secondAttribute="trailing" constant="20" id="yOB-72-Mjh"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -264,20 +316,6 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                                 <viewLayoutGuide key="contentLayoutGuide" id="LYd-qH-iQJ"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="l3U-Hy-ZCE"/>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSF-9o-8pg" userLabel="ShareButton">
-                                <rect key="frame" x="284" y="44" width="110" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="110" id="CoD-dc-GVS"/>
-                                    <constraint firstAttribute="height" constant="34" id="UCf-T6-Lp7"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <state key="normal" title="Поделиться">
-                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="pressShareButton:" destination="9xY-vC-5tC" eventType="touchUpInside" id="7cH-1e-beW"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -286,11 +324,6 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                             <constraint firstItem="Ecg-zl-4Ye" firstAttribute="leading" secondItem="tZM-gk-QLe" secondAttribute="leading" id="EpC-rh-hF3"/>
                             <constraint firstItem="tZM-gk-QLe" firstAttribute="bottom" secondItem="Ecg-zl-4Ye" secondAttribute="bottom" id="G97-vZ-kUq"/>
                             <constraint firstItem="Ecg-zl-4Ye" firstAttribute="top" secondItem="tZM-gk-QLe" secondAttribute="top" constant="54" id="I6J-gd-db1"/>
-                            <constraint firstItem="wSF-9o-8pg" firstAttribute="top" secondItem="tZM-gk-QLe" secondAttribute="top" id="I6l-65-Tij"/>
-                            <constraint firstItem="YbK-C8-6dn" firstAttribute="top" secondItem="tZM-gk-QLe" secondAttribute="top" id="P91-cT-Ehw"/>
-                            <constraint firstItem="YbK-C8-6dn" firstAttribute="leading" relation="lessThanOrEqual" secondItem="tZM-gk-QLe" secondAttribute="leading" constant="200" id="Q7x-vS-K12"/>
-                            <constraint firstItem="tZM-gk-QLe" firstAttribute="trailing" secondItem="YbK-C8-6dn" secondAttribute="trailing" constant="20" id="iLX-Fc-Zih"/>
-                            <constraint firstItem="tZM-gk-QLe" firstAttribute="trailing" secondItem="wSF-9o-8pg" secondAttribute="trailing" constant="20" id="pwX-xr-3Uj"/>
                             <constraint firstItem="0pO-V3-FdP" firstAttribute="leading" secondItem="tZM-gk-QLe" secondAttribute="leading" constant="20" id="qHG-GG-53f"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tZM-gk-QLe"/>
@@ -306,7 +339,9 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                         <outlet property="returnButton" destination="0pO-V3-FdP" id="jvK-PD-eFj"/>
                         <outlet property="saveButton" destination="YbK-C8-6dn" id="PR8-bs-5Ad"/>
                         <outlet property="shareButton" destination="wSF-9o-8pg" id="ddu-zU-N8w"/>
+                        <outlet property="sourceNameLabel" destination="MAt-CQ-bv1" id="fb0-tY-dfX"/>
                         <outlet property="textView" destination="dQn-Ep-tey" id="dIZ-tI-vzC"/>
+                        <outlet property="urlLabel" destination="Dj0-Xb-8N6" id="hDP-MU-k93"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="atU-MI-GQZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -370,10 +405,7 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1WF-fj-sGf">
                                 <rect key="frame" x="20" y="757" width="120" height="33"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="fYU-Hy-A5f"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="yO9-CK-k9f"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <state key="normal" title="GCD">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -526,8 +558,6 @@ Aenean ornare odio in elit dignissim hendrerit et in justo. Maecenas elit lacus,
                             <constraint firstItem="PnZ-G2-m7T" firstAttribute="leading" secondItem="J1P-UH-22v" secondAttribute="leading" constant="20" id="lxA-sA-Zr9"/>
                             <constraint firstItem="3e3-9R-6pI" firstAttribute="top" secondItem="J1P-UH-22v" secondAttribute="top" constant="1" id="okZ-l0-UnR"/>
                             <constraint firstItem="KtY-LM-Ch2" firstAttribute="trailing" secondItem="5JF-YT-tpc" secondAttribute="trailing" constant="-5" id="rkH-I5-tEf"/>
-                            <constraint firstItem="J1P-UH-22v" firstAttribute="bottom" secondItem="1WF-fj-sGf" secondAttribute="bottom" constant="72" id="tJr-Rn-eaQ"/>
-                            <constraint firstItem="1WF-fj-sGf" firstAttribute="leading" secondItem="J1P-UH-22v" secondAttribute="leading" constant="20" id="wYn-4P-h1Y"/>
                             <constraint firstItem="5JF-YT-tpc" firstAttribute="top" secondItem="J1P-UH-22v" secondAttribute="top" constant="61" id="xT6-b2-CiL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="J1P-UH-22v"/>

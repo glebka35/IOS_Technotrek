@@ -26,7 +26,7 @@ class ViewController: UIViewController{
     }
     var pageArticles = 1
     var isFetchInProgress = false
-    var isGetArticleFromCoreData = true {
+    var isGetArticleFromCoreData : Bool? {
         didSet {
             pageArticles = 1
             takeDataFromCoreDataOrInternet()
@@ -72,8 +72,20 @@ class ViewController: UIViewController{
 
 //        NotificationCenter.default.addObserver(self, selector: #selector(setToDark(notification:)), name: .dark, object: nil)
         super.viewDidLoad()
-        isGetArticleFromCoreData = true
+
 //        print(workWithCppClass(myString: currentCategory))
+        if CheckInternet.Connection(){
+            print("Network is enabled")
+            DispatchQueue.global(qos: .default).async {[weak self] in
+                guard let self = self else {return}
+                self.deleteArticles(category: self.currentCategory)
+            }
+            
+        } else {
+            print("Network is disabled")
+            isGetArticleFromCoreData = true
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -130,8 +142,6 @@ extension ViewController : UIPickerViewDelegate, UIPickerViewDataSource {
                 self.viemForPicker.isHidden = true
                 self.viemForPicker.layer.transform = CATransform3DIdentity
             }
-            
-           
             viewForGesture.isHidden = true
             changeCategory()
         }
@@ -139,12 +149,14 @@ extension ViewController : UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBAction func closePickerView(_ sender: UITapGestureRecognizer) {
         let transform = CATransform3DTranslate(CATransform3DIdentity, 0, pickerView.bounds.height, 0)
-        UIView.animate(withDuration: 0.3) {
-            self.viemForPicker.layer.transform = transform
-        }
-        viemForPicker.isHidden = true
-        viewForGesture.isHidden = true
-        changeCategory()
+         UIView.animate(withDuration: 0.3, animations: {
+             self.viemForPicker.layer.transform = transform
+         }) {(finished) in
+             self.viemForPicker.isHidden = true
+             self.viemForPicker.layer.transform = CATransform3DIdentity
+         }
+         viewForGesture.isHidden = true
+         changeCategory()
     }
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -175,7 +187,18 @@ extension ViewController : UIPickerViewDelegate, UIPickerViewDataSource {
                 self.isNewsAppeared.removeAll()
                 self.pageArticles = 1
                 self.listOfArticles.removeAll()
-                takeDataFromCoreDataOrInternet()
+                
+                if CheckInternet.Connection(){
+                    print("Network is enabled")
+                    DispatchQueue.global(qos: .default).async {[weak self] in
+                        guard let self = self else {return}
+                        self.deleteArticles(category: self.currentCategory)
+                    }
+                    
+                } else {
+                    print("Network is disabled")
+                    isGetArticleFromCoreData = true
+                }
         }
     }
 }
@@ -210,6 +233,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
             articleVC.image = UIImage(data:listOfArticles[indexPath.row].image!)
             articleVC.currentCategory = self.currentCategory
             articleVC.urlToArticle = listOfArticles[indexPath.row].url ?? ""
+            articleVC.sourceName = listOfArticles[indexPath.row].source?.name ?? ""
             articleVC.articletTitle = listOfArticles[indexPath.row].title ?? "No title"
             self.navigationController?.pushViewController(articleVC, animated: true)
         }
@@ -258,6 +282,7 @@ extension ViewController{
                         self.isFetchInProgress = false
                         self.listOfArticles += articles
                         self.countOfArticles = self.listOfArticles.count
+                        print(articles.count)
                         self.imagesToDownload = articles.count
                         self.downloadImage()
                     }
@@ -270,26 +295,28 @@ extension ViewController:GUImageDownloader{
     func downloadImage() {
         let session = URLSession(configuration: .default)
         if(self.listOfArticles.count > 0){
-            for i in self.listOfArticles.count - self.imagesToDownload...self.listOfArticles.count - 1 {
-                let URLToImageString = self.listOfArticles[i].urlToImage
-                self.listOfArticles[i].image = UIImage(named: "noPicture.png")?.pngData()
-                if let unwrapedURLToImageString = URLToImageString,
-                    let imageUrl = URL(string: unwrapedURLToImageString){
-                        let getImageFromUrl = session.dataTask(with: imageUrl) { (data, _, _) in
-                            DispatchQueue.main.async {
-                                self.countOfDownloadedImages += 1
-                            }
-                            guard let imageData = data else { return }
-                            if(self.listOfArticles.count > 0){
+            if(self.listOfArticles.count - self.imagesToDownload < self.listOfArticles.count - 1){
+                for i in self.listOfArticles.count - self.imagesToDownload...self.listOfArticles.count - 1 {
+                    let URLToImageString = self.listOfArticles[i].urlToImage
+                    self.listOfArticles[i].image = UIImage(named: "noPicture.png")?.pngData()
+                    if let unwrapedURLToImageString = URLToImageString,
+                        let imageUrl = URL(string: unwrapedURLToImageString){
+                            let getImageFromUrl = session.dataTask(with: imageUrl) { (data, _, _) in
                                 DispatchQueue.main.async {
-                                    self.listOfArticles[i].image = imageData
+                                    self.countOfDownloadedImages += 1
+                                }
+                                guard let imageData = data else { return }
+                                if(self.listOfArticles.count > 0){
+                                    DispatchQueue.main.async {
+                                        self.listOfArticles[i].image = imageData
+                                    }
                                 }
                             }
+                            getImageFromUrl.resume()
+                        } else {
+                            self.countOfDownloadedImages += 1
                         }
-                        getImageFromUrl.resume()
-                    } else {
-                        self.countOfDownloadedImages += 1
-                    }
+                }
             }
         }
     }
@@ -320,6 +347,7 @@ extension ViewController {
                 articleForContext.date = article.publishedAt
                 articleForContext.image = article.image
                 articleForContext.url = article.url
+                articleForContext.source = article.source?.name
                 articleForContext.descr = article.description
                 articleForContext.category = categoryUnwraped
                 categoryUnwraped.addToArticle(articleForContext)
@@ -334,7 +362,7 @@ extension ViewController {
         let predicate = NSPredicate(format: "category.name == %@", category)
         newsFetchRequest.sortDescriptors = [sortDescriptor]
         newsFetchRequest.predicate = predicate
-        newsFetchRequest.propertiesToFetch = ["content", "author", "image", "title", "date"]
+        newsFetchRequest.propertiesToFetch = ["content", "author", "image", "title", "date", "source"]
         newsFetchRequest.fetchLimit = 20
         newsFetchRequest.fetchOffset = 20 * (self.pageArticles - 1)
         guard let context = self.coreDataManager.masterContext else {return nil}
@@ -358,6 +386,8 @@ extension ViewController {
                 article.image = news.image
                 article.title = news.title
                 article.url = news.url
+                article.source = Source()
+                article.source!.name = news.source ?? ""
                 article.publishedAt = news.date
                 article.description = news.descr
                 gotArticles.append(article)
@@ -382,6 +412,36 @@ extension ViewController {
                 self.isGetArticleFromCoreData = false
             }
         }
+    }
+    
+    func deleteArticles(category: String){
+        let newsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Articles")
+        let predicate = NSPredicate(format: "category.name == %@", category)
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        newsFetchRequest.predicate = predicate
+        newsFetchRequest.sortDescriptors = [sortDescriptor]
+        guard let context = self.coreDataManager.masterContext else {return}
+        let frc = NSFetchedResultsController(fetchRequest: newsFetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        do {
+            _ = try frc.performFetch()
+            let result = frc.fetchedObjects
+            
+            result?.forEach({(record) in
+                context.delete(record as! NSManagedObject)
+            })
+            self.coreDataManager.performSave(context: context)
+            
+            DispatchQueue.main.async {
+                    self.isGetArticleFromCoreData = false
+            }
+        }
+        catch {
+            DispatchQueue.main.async {
+                self.isFetchInProgress = false
+            }
+            print("CoreDataError: \(error.localizedDescription)")
+        }
+        
     }
     
     func getCategory(categoryName : String)->Categories? {
@@ -436,7 +496,7 @@ extension ViewController{
     func takeDataFromCoreDataOrInternet(){
         if(!isFetchInProgress){
             isFetchInProgress = true
-            if(!self.isGetArticleFromCoreData){
+            if(!self.isGetArticleFromCoreData!){
                 downloadArticles()
             } else {
                 DispatchQueue.global(qos: .default).async {[weak self] in
