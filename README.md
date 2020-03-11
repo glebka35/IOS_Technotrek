@@ -1,4 +1,4 @@
-# IOS_Techotrek
+# IOS_Technotrek
 Autumn course of IOS developing
 
 This is a NEWS program for iPhones. It has some features:
